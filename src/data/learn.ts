@@ -4,7 +4,7 @@ export interface Article {
   link: string;
 }
 
-export const articles: articles[] = [
+export const articles: Article[] = [
   { 
     title: "Fertilizer Guide for Beginners", 
     description: "An accessible guide that demystifies fertilizer labels and offers tips on choosing the right fertilizer for your garden.", 
