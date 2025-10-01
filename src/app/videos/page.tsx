@@ -1,0 +1,96 @@
+"use client";
+import React, { useState } from "react";
+import VideoCard from "../components/VideoCard";
+import { rawVideos, Video } from "../../data/videos";
+
+// 🔹 Parser stays here (UI-level)
+function parseYouTubeLink(link: string) {
+  const regex =
+    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = link.match(regex);
+  if (!match) return { thumbnail: "", embed: "" };
+
+  const videoId = match[1];
+  return {
+    thumbnail: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+    embed: `https://www.youtube.com/embed/${videoId}`,
+  };
+}
+
+export default function VideosPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  // 🔹 Enrich with embed + thumbnail
+  const videos = rawVideos.map((v) => {
+    const { thumbnail, embed } = parseYouTubeLink(v.link);
+    return { ...v, thumbnail, embed };
+  });
+
+  const categories = ["All", ...Array.from(new Set(videos.map((v) => v.category)))];
+
+  const filteredVideos =
+    selectedCategory === "All"
+      ? videos
+      : videos.filter((v) => v.category === selectedCategory);
+
+  return (
+    <section style={{ padding: "50px 20px" }}>
+      <h1
+        style={{
+          fontSize: "2.5rem",
+          marginBottom: "30px",
+          color: "#1b5e20",
+          textAlign: "center",
+        }}
+      >
+        Explore Farming Videos
+      </h1>
+
+      {/* Category Filter */}
+      <div
+        style={{
+          display: "flex",
+          gap: "15px",
+          justifyContent: "center",
+          flexWrap: "wrap",
+          marginBottom: "40px",
+        }}
+      >
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            style={{
+              padding: "10px 20px",
+              borderRadius: "25px",
+              border: "none",
+              cursor: "pointer",
+              background: selectedCategory === cat ? "#2E7D32" : "#e0e0e0",
+              color: selectedCategory === cat ? "white" : "#333",
+              fontWeight: "bold",
+              boxShadow:
+                selectedCategory === cat ? "0 4px 12px rgba(0,0,0,0.2)" : "none",
+              transition: "all 0.2s",
+            }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Videos Grid */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "20px",
+          justifyContent: "center",
+        }}
+      >
+        {filteredVideos.map((video, idx) => (
+          <VideoCard key={idx} video={video} />
+        ))}
+      </div>
+    </section>
+  );
+}
