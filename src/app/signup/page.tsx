@@ -43,17 +43,19 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-white to-green-200 relative overflow-hidden">
-      {/* Animated background circles */}
-      <div className="absolute w-72 h-72 bg-green-400/30 rounded-full blur-3xl top-10 left-10 animate-pulse" />
-      <div className="absolute w-64 h-64 bg-green-600/20 rounded-full blur-3xl bottom-10 right-10 animate-pulse" />
+    <div className="relative flex items-center justify-center min-h-screen overflow-hidden">
+      {/* 🖼 Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('/signup_bg.jpg')` }}
+      />
 
       <motion.form
         onSubmit={handleSignup}
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-96 z-10 border border-green-100"
+        className="relative bg-white/80 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-96 z-10 border border-green-100"
       >
         <h1 className="text-3xl font-extrabold mb-6 text-green-700">
           🌾 Create Your EduFarm Account
@@ -65,11 +67,11 @@ export default function SignupPage() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 font-medium"
             placeholder="Username"
             required
           />
-          <label className="absolute left-3 top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
+          <label className="absolute left-3 top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
             Username
           </label>
         </div>
@@ -80,11 +82,11 @@ export default function SignupPage() {
             type="text"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 font-medium"
             placeholder="Company"
             required
           />
-          <label className="absolute left-3 top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
+          <label className="absolute left-3 top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
             Company
           </label>
         </div>
@@ -95,11 +97,11 @@ export default function SignupPage() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 font-medium"
             placeholder="Email"
             required
           />
-          <label className="absolute left-3 top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
+          <label className="absolute left-3 top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
             Email
           </label>
         </div>
@@ -110,11 +112,11 @@ export default function SignupPage() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="peer w-full border border-green-300 rounded-lg p-3 placeholder-transparent focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 font-medium"
             placeholder="Password"
             required
           />
-          <label className="absolute left-3 top-3.5 text-gray-500 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
+          <label className="absolute left-3 top-3.5 text-gray-900 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-xs peer-focus:text-green-700 bg-white px-1">
             Password
           </label>
         </div>
@@ -134,7 +136,7 @@ export default function SignupPage() {
           {loading ? "Creating Account..." : "Sign Up"}
         </motion.button>
 
-        <p className="mt-4 text-sm text-gray-600">
+        <p className="mt-4 text-sm text-gray-800">
           Already have an account?{" "}
           <a
             href="/login"
