@@ -14,16 +14,12 @@ const firebaseConfig = {
   measurementId: "G-D48GJSZWFK",
 };
 
-// ✅ Initialize Firebase app
+// ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// ✅ Firestore instance
-const db = getFirestore(app);
-
-// ✅ Firebase Auth instance (for login/signup)
+// ✅ Initialize services
 const auth = getAuth(app);
+const db = getFirestore(app); // optional, if you plan to use Firestore
 
-// ❌ Remove anonymous sign-in (we now use email/password instead)
-
-// ✅ Export for use throughout your app
-export { app, db, auth };
+// ✅ Export everything once
+export { app, auth, db };
