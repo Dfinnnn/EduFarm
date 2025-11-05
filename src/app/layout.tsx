@@ -3,6 +3,7 @@
 import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Chatbot from "./components/chatbot"; // ✅ Import chatbot
 import { usePathname } from "next/navigation";
 
 export default function RootLayout({
@@ -12,8 +13,10 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
-  // Hide Header & Footer on login and signup pages
-  const hideHeaderFooter = pathname === "/login" || pathname === "/signup";
+  // Hide Header, Footer, and Chatbot on login and signup pages
+  const hideUI =
+    pathname === "/login" ||
+    pathname === "/signup";
 
   return (
     <html lang="en">
@@ -24,11 +27,13 @@ export default function RootLayout({
           background: "#f5f5f5",
         }}
       >
-        {!hideHeaderFooter && <Header />}
+        {!hideUI && <Header />}
         <main>{children}</main>
-        {!hideHeaderFooter && <Footer />}
+        {!hideUI && <Footer />}
+
+        {/* ✅ Global chatbot (visible on all pages except login/signup) */}
+        {!hideUI && <Chatbot />}
       </body>
     </html>
   );
 }
-

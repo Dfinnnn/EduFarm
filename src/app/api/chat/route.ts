@@ -3,9 +3,27 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const { message } = await req.json();
-    const GEMINI_API_KEY = "AIzaSyBVbaRlVkEq8nfW_mTyb_X42B-FvZs5AIQ"; // replace with your key
-    const GEMINI_MODEL = "gemini-2.5-pro";
 
+    // 🔐 Load from environment (.env.local)
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-1.5-pro";
+
+    if (!GEMINI_API_KEY) {
+      throw new Error("Missing Gemini API key. Please set GEMINI_API_KEY in .env.local");
+    }
+
+    // 🧠 System instruction
+    const systemPrompt = `
+You are an experienced agricultural assistant designed to help farmers.
+Your tone is warm, professional, and supportive.
+Provide clear, practical, and well-structured answers about farming, crops, soil, weather, pest management, irrigation, and sustainable agriculture practices.
+Avoid using bullet points (*, -, •). Write in complete sentences and paragraphs.
+If the user greets you or asks casual, non-agricultural questions, reply briefly and naturally, like a friendly assistant.
+If the user asks about farming or agriculture, provide a clear, informative, and well-explained answer.
+Focus on being helpful, natural, and easy to understand at all times.
+    `;
+
+    // 🌐 Send request to Gemini API
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
       {
@@ -14,7 +32,10 @@ export async function POST(req: Request) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          contents: [{ parts: [{ text: message }] }],
+          contents: [
+            { parts: [{ text: systemPrompt }] },
+            { parts: [{ text: message }] },
+          ],
         }),
       }
     );
@@ -24,9 +45,16 @@ export async function POST(req: Request) {
     }
 
     const data = await res.json();
-    const reply =
+    let reply =
       data.candidates?.[0]?.content?.parts?.[0]?.text ||
       "⚠️ No response from Gemini.";
+
+    // 🧹 Clean formatting
+    reply = reply
+      .replace(/\*/g, "")
+      .replace(/#+/g, "")
+      .replace(/\n{2,}/g, "\n")
+      .trim();
 
     return NextResponse.json({ reply });
   } catch (error) {

@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useState, useMemo } from "react";
-import { onAuthStateChanged, signOut, User } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "../firebase";
-import { db } from "../firebase"; // ✅ make sure Firestore is imported
-import { doc, getDoc } from "firebase/firestore"; // ✅ import Firestore methods
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import VideoCard from "./components/VideoCard";
 import { rawVideos, Video } from "../data/videos";
 import Chatbot from "./components/chatbot";
 
-// 🔹 Helper: extract YouTube thumbnail + embed link
 function parseYouTubeLink(link: string) {
   const regex =
     /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -25,7 +24,7 @@ function parseYouTubeLink(link: string) {
 
 export default function Home() {
   const [user, setUser] = useState<User | null>(null);
-  const [username, setUsername] = useState<string>(""); // ✅ add username state
+  const [username, setUsername] = useState<string>("");
   const router = useRouter();
 
   useEffect(() => {
@@ -37,7 +36,6 @@ export default function Home() {
 
       setUser(currentUser);
 
-      // ✅ Fetch username from Firestore
       try {
         const userRef = doc(db, "users", currentUser.uid);
         const userSnap = await getDoc(userRef);
@@ -75,18 +73,7 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-white">
-      {/* 🔹 Logout Button (top-right corner) */}
-      <div className="absolute top-5 right-8 z-50">
-        <button
-          onClick={() => {
-            signOut(auth);
-            router.push("/login");
-          }}
-          className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-all"
-        >
-          Logout
-        </button>
-      </div>
+      {/* ✅ Removed the Logout button here */}
 
       {/* 🔹 Hero Section */}
       <section
@@ -112,9 +99,8 @@ export default function Home() {
           }}
         />
         <div style={{ position: "relative", zIndex: 1 }}>
-          {/* ✅ Use username instead of email */}
           <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>
-            Welcome to EduFarm, {username} 🌱
+            Welcome to EduFarm, {username} !
           </h1>
           <p style={{ fontSize: "1.2rem", marginBottom: "30px" }}>
             Free farming education for everyone. Learn, grow, and succeed!
@@ -164,6 +150,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+
       <Chatbot />
     </div>
   );

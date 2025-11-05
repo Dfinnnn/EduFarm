@@ -1,5 +1,7 @@
 "use client";
+
 import { useState, useRef, useEffect } from "react";
+import { MessageCircle, X } from "lucide-react"; // ✅ Clean modern icons
 
 export default function Chatbot() {
   const [messages, setMessages] = useState<{ sender: "user" | "bot"; text: string }[]>([]);
@@ -42,15 +44,15 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* Floating Chat Button */}
+      {/* 🌿 Floating Chat Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-6 right-6 z-50 bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-lg transition-all"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-green-600 hover:bg-green-700 text-white rounded-full shadow-lg transition-all"
       >
-        {open ? "✖" : "💬"}
+        {open ? <X size={26} /> : <MessageCircle size={26} />}
       </button>
 
-      {/* Chat Window */}
+      {/* 🌿 Chat Window */}
       {open && (
         <div className="fixed bottom-20 right-6 z-50 w-80 h-96 bg-white border rounded-2xl shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
@@ -58,7 +60,7 @@ export default function Chatbot() {
             🌿 EduFarm Assistant
           </div>
 
-          {/* Chat Area */}
+          {/* Chat Messages */}
           <div className="flex-1 overflow-y-auto p-3 space-y-2">
             {messages.map((m, i) => (
               <div
@@ -77,16 +79,14 @@ export default function Chatbot() {
               </div>
             ))}
 
-            {loading && (
-              <div className="text-gray-400 text-sm italic">Typing...</div>
-            )}
+            {loading && <div className="text-gray-400 text-sm italic">Typing...</div>}
             <div ref={chatEndRef} />
           </div>
 
           {/* Input Bar */}
           <div className="flex border-t">
             <input
-              className="flex-1 p-2 text-sm outline-none"
+              className="flex-1 p-2 text-sm outline-none text-black"
               placeholder="Type a question..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
