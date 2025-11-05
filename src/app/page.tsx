@@ -8,6 +8,7 @@ import { doc, getDoc } from "firebase/firestore"; // ✅ import Firestore method
 import { useRouter } from "next/navigation";
 import VideoCard from "./components/VideoCard";
 import { rawVideos, Video } from "../data/videos";
+import Chatbot from "./components/chatbot";
 
 // 🔹 Helper: extract YouTube thumbnail + embed link
 function parseYouTubeLink(link: string) {
@@ -163,6 +164,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <Chatbot />
     </div>
   );
 }
