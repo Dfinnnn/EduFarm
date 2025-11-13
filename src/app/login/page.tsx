@@ -45,7 +45,7 @@ export default function LoginPage() {
         className="relative bg-white/90 p-10 rounded-2xl shadow-xl w-96 text-center backdrop-blur-sm border border-green-200 z-10"
       >
         <h1 className="text-3xl font-extrabold mb-4 text-green-700">
-          Welcome Back 👋
+          Welcome Back to EduFarm 👋
         </h1>
         <p className="text-sm text-gray-800 mb-6">
           Please log in to your account

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X } from "lucide-react"; // ✅ Clean modern icons
+import { MessageCircle, X } from "lucide-react";
 
 export default function Chatbot() {
   const [messages, setMessages] = useState<{ sender: "user" | "bot"; text: string }[]>([]);
@@ -9,9 +9,25 @@ export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const hasGreeted = useRef(false); // 👈 to prevent multiple greetings
 
   const scrollToBottom = () => chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   useEffect(scrollToBottom, [messages]);
+
+  // 🌿 Auto greeting when opened
+  useEffect(() => {
+    if (open && !hasGreeted.current) {
+      hasGreeted.current = true;
+      setTimeout(() => {
+        setMessages([
+          {
+            sender: "bot",
+            text: "👋 Hello there! I'm your assistant for today — how can I help you?",
+          },
+        ]);
+      }, 800);
+    }
+  }, [open]);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
@@ -57,7 +73,7 @@ export default function Chatbot() {
         <div className="fixed bottom-20 right-6 z-50 w-80 h-96 bg-white border rounded-2xl shadow-2xl flex flex-col overflow-hidden">
           {/* Header */}
           <div className="bg-green-600 text-white text-center py-2 font-semibold">
-            🌿 EduFarm Assistant
+            🤖 EduFarm Assistant
           </div>
 
           {/* Chat Messages */}

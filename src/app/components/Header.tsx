@@ -38,6 +38,7 @@ export default function Header() {
   const links = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
+    { href: "/product", label: "Product" }, // ✅ New Product section
     { href: "/videos", label: "Videos" },
     { href: "/forum", label: "Forum" },
   ];
@@ -52,7 +53,7 @@ export default function Header() {
           transition={{ duration: 0.5 }}
           className="text-3xl md:text-4xl font-extrabold text-green-700 tracking-tight"
         >
-          EduFarm 
+          EduFarm
         </motion.div>
 
         {/* 🌿 Navigation Links */}

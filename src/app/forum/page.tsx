@@ -2,16 +2,36 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { getClientId } from "../../../utils/clientId";
 import { addPost, deletePost, addReply, deleteReply } from "../../../utils/firestoreUtils";
+
+// ✅ Local safe clientId generator (no need to import getClientId)
+const getSafeClientId = () => {
+  if (typeof window === "undefined") return "";
+  let id = localStorage.getItem("clientId");
+  if (!id) {
+    if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
+      id = crypto.randomUUID();
+    } else {
+      id = "client-" + Math.random().toString(36).substring(2) + Date.now().toString(36);
+    }
+    localStorage.setItem("clientId", id);
+  }
+  return id;
+};
 
 export default function ForumPage() {
   const [posts, setPosts] = useState<any[]>([]);
   const [newPost, setNewPost] = useState("");
   const [username, setUsername] = useState("");
+  const [clientId, setClientId] = useState<string>("");
 
-  const clientId = getClientId();
+  // ✅ Get clientId on mount
+  useEffect(() => {
+    const id = getSafeClientId();
+    setClientId(id);
+  }, []);
 
+  // ✅ Fetch posts in real-time
   useEffect(() => {
     const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -61,10 +81,11 @@ export default function ForumPage() {
         />
         <div style={{ position: "relative", zIndex: 1 }}>
           <h1 style={{ fontSize: "3rem", marginBottom: "10px", fontWeight: "bold" }}>
-             Welcome to Farmnity
+            Welcome to Farmnity
           </h1>
           <p style={{ fontSize: "1.2rem", maxWidth: "700px", margin: "0 auto" }}>
-            A professional community forum where farmers, learners, and innovators share knowledge, tips, and experiences to grow together.
+            A professional community forum where farmers, learners, and innovators share knowledge,
+            tips, and experiences to grow together.
           </p>
         </div>
       </header>
@@ -81,9 +102,7 @@ export default function ForumPage() {
             marginBottom: "30px",
           }}
         >
-          <h2 style={{ marginTop: 0, fontSize: "1.5rem", color: "#2E7D32" }}>
-            Start a Discussion
-          </h2>
+          <h2 style={{ marginTop: 0, fontSize: "1.5rem", color: "#2E7D32" }}>Start a Discussion</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "15px" }}>
             <input
               type="text"
@@ -140,10 +159,10 @@ export default function ForumPage() {
 
         {/* Posts Feed */}
         <section>
-          <h2 style={{ fontSize: "1.5rem", marginBottom: "20px", color: "#111" }}>
-            Recent Posts
-          </h2>
-          {posts.length === 0 && <p style={{ color: "#555" }}>No posts yet. Start the conversation!</p>}
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "20px", color: "#111" }}>Recent Posts</h2>
+          {posts.length === 0 && (
+            <p style={{ color: "#555" }}>No posts yet. Start the conversation!</p>
+          )}
           {posts.map((post) => (
             <div
               key={post.id}
@@ -158,11 +177,12 @@ export default function ForumPage() {
               <strong style={{ color: "#2E7D32", fontSize: "1.1rem" }}>{post.user}</strong>
               <p style={{ margin: "8px 0", fontSize: "1rem", color: "#222" }}>{post.text}</p>
               <small style={{ color: "#666" }}>
-                {post.createdAt?.toDate ? post.createdAt.toDate().toLocaleString() : "Just now"}
+                {post.createdAt?.toDate
+                  ? post.createdAt.toDate().toLocaleString()
+                  : "Just now"}
               </small>
 
-              {/* Delete Post */}
-              {post.clientId === clientId && (
+              {clientId && post.clientId === clientId && (
                 <button
                   onClick={() => deletePost(post.id, post.clientId)}
                   style={{
@@ -179,7 +199,7 @@ export default function ForumPage() {
                 </button>
               )}
 
-              <Replies postId={post.id} clientId={clientId} />
+              {clientId && <Replies postId={post.id} clientId={clientId} />}
             </div>
           ))}
         </section>
@@ -188,7 +208,7 @@ export default function ForumPage() {
   );
 }
 
-// Replies Component
+// ✅ Replies Component
 function Replies({ postId, clientId }: { postId: string; clientId: string }) {
   const [replies, setReplies] = useState<any[]>([]);
   const [replyText, setReplyText] = useState("");
@@ -234,7 +254,12 @@ function Replies({ postId, clientId }: { postId: string; clientId: string }) {
           {reply.clientId === clientId && (
             <button
               onClick={() => handleDeleteReply(reply.id, reply.clientId)}
-              style={{ border: "none", background: "transparent", cursor: "pointer", color: "#c00" }}
+              style={{
+                border: "none",
+                background: "transparent",
+                cursor: "pointer",
+                color: "#c00",
+              }}
             >
               🗑️
             </button>
