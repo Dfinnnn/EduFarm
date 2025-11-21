@@ -6,24 +6,30 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
+import { useApp } from "../context/appcontext";
+import { useTranslations } from "../../hooks/useTranslations";
 
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // ✅ Track user state
+  const { lang, setLang } = useApp();
+  const { t } = useTranslations();
+
+  // Mark client mount
+  useEffect(() => setMounted(true), []);
+
+  // Auth listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (!isLoggingOut) {
-        setUser(currentUser);
-      }
+      if (!isLoggingOut) setUser(currentUser);
     });
     return () => unsubscribe();
   }, [isLoggingOut]);
 
-  // ✅ Smooth logout without flicker
   const handleLogout = async () => {
     setIsLoggingOut(true);
     try {
@@ -36,80 +42,93 @@ export default function Header() {
   };
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/about", label: "About Us" },
-    { href: "/product", label: "Product" }, // ✅ New Product section
-    { href: "/videos", label: "Videos" },
-    { href: "/forum", label: "Forum" },
+    { href: "/", label: t("nav.home") },
+    { href: "/about", label: t("nav.about") },
+    { href: "/product", label: t("nav.product") },
+    { href: "/videos", label: t("nav.videos") },
+    { href: "/forum", label: t("nav.forum") },
   ];
+
+  // Don't render dynamic client-dependent UI until mounted
+  if (!mounted) return null;
 
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-green-100 shadow-md">
       <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 lg:px-10 py-3">
-        {/* 🌿 Logo */}
+        {/* Brand */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-extrabold text-green-700 tracking-tight"
+          className="text-3xl md:text-4xl font-extrabold text-green-700 tracking-tight -ml-20"
         >
-          EduFarm
+          {t("header.brand")}
         </motion.div>
 
-        {/* 🌿 Navigation Links */}
-        <ul className="hidden md:flex gap-8 text-xl font-semibold items-center">
+        {/* Desktop nav */}
+        <ul className="hidden md:flex gap-4 text-xl font-semibold items-center">
           {links.map((link) => {
             const isActive = pathname === link.href;
             return (
-              <motion.li
-                key={link.href}
-                whileHover={{ scale: 1.08 }}
-                className="relative group"
-              >
+              <li key={link.href} className="relative group" style={{ minWidth: "120px", textAlign: "center" }}>
                 <Link
                   href={link.href}
-                  className={`px-5 py-2 rounded-full transition-all duration-300 ${
-                    isActive
-                      ? "bg-green-600 text-white shadow-md"
-                      : "text-green-700 hover:bg-green-100"
+                  className={`px-3 py-2 rounded-full transition-all duration-300 block ${
+                    isActive ? "bg-green-600 text-white shadow-md" : "text-green-700 hover:bg-green-100"
                   }`}
                 >
                   {link.label}
                 </Link>
                 {!isActive && (
-                  <motion.span
-                    className="absolute bottom-0 left-0 w-full h-[3px] bg-green-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
-                  />
+                  <span className="absolute bottom-0 left-0 w-full h-[3px] bg-green-600 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                 )}
-              </motion.li>
+              </li>
             );
           })}
 
-          {/* ✅ Show Logout only if logged in */}
+          {/* Language Switch */}
+          <div className="flex gap-2 items-center ml-4">
+            <button
+              onClick={() => setLang("en")}
+              className={`px-3 py-1 rounded-full text-sm w-12 text-center ${
+                lang === "en" ? "bg-green-600 text-white" : "bg-green-100 text-green-700"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang("bm")}
+              className={`px-3 py-1 rounded-full text-sm w-12 text-center ${
+                lang === "bm" ? "bg-green-600 text-white" : "bg-green-100 text-green-700"
+              }`}
+            >
+              BM
+            </button>
+          </div>
+
+          {/* Logout */}
           {user && (
             <li>
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="ml-4 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full shadow-md transition-all"
+                className="ml-4 bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-full shadow-md transition-all min-w-[120px]"
               >
-                {isLoggingOut ? "Logging out..." : "Logout"}
+                {isLoggingOut ? "Logging out..." : t("header.logout")}
               </button>
             </li>
           )}
         </ul>
       </nav>
 
-      {/* 🌿 Mobile Menu */}
+      {/* Mobile nav */}
       <div className="md:hidden flex justify-center border-t border-green-100 bg-white py-2">
         {links.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={`mx-2 px-3 py-2 rounded-md text-base font-semibold ${
-              pathname === link.href
-                ? "bg-green-600 text-white"
-                : "text-green-700 hover:bg-green-100"
+            className={`mx-2 px-3 py-2 rounded-md text-base font-semibold block min-w-[80px] text-center ${
+              pathname === link.href ? "bg-green-600 text-white" : "text-green-700 hover:bg-green-100"
             }`}
           >
             {link.label}
@@ -119,9 +138,9 @@ export default function Header() {
           <button
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="mx-2 px-3 py-2 rounded-md text-base font-semibold bg-red-600 hover:bg-red-700 text-white"
+            className="mx-2 px-3 py-2 rounded-md text-base font-semibold bg-red-600 hover:bg-red-700 text-white min-w-[80px]"
           >
-            {isLoggingOut ? "..." : "Logout"}
+            {isLoggingOut ? "..." : t("header.logout")}
           </button>
         )}
       </div>

@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import VideoCard from "../components/VideoCard";
-import { rawVideos, Video } from "../../data/videos";
+import { rawVideos } from "../../data/videos";
+import { useTranslations } from "@/hooks/useTranslations";
 
 // 🔹 Parser stays here (UI-level)
 function parseYouTubeLink(link: string) {
@@ -18,7 +19,14 @@ function parseYouTubeLink(link: string) {
 }
 
 export default function VideosPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const { t, lang } = useTranslations();
+
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  // 🔹 Set default category based on language
+  useEffect(() => {
+    setSelectedCategory(t("videos.all"));
+  }, [lang]);
 
   // 🔹 Enrich with embed + thumbnail
   const videos = rawVideos.map((v) => {
@@ -26,10 +34,10 @@ export default function VideosPage() {
     return { ...v, thumbnail, embed };
   });
 
-  const categories = ["All", ...Array.from(new Set(videos.map((v) => v.category)))];
+  const categories = [t("videos.all"), ...Array.from(new Set(videos.map((v) => v.category)))];
 
   const filteredVideos =
-    selectedCategory === "All"
+    selectedCategory === t("videos.all")
       ? videos
       : videos.filter((v) => v.category === selectedCategory);
 
@@ -43,7 +51,7 @@ export default function VideosPage() {
           textAlign: "center",
         }}
       >
-        Explore Farming Videos
+        {t("videos.title")}
       </h1>
 
       {/* Category Filter */}
@@ -69,7 +77,9 @@ export default function VideosPage() {
               color: selectedCategory === cat ? "white" : "#333",
               fontWeight: "bold",
               boxShadow:
-                selectedCategory === cat ? "0 4px 12px rgba(0,0,0,0.2)" : "none",
+                selectedCategory === cat
+                  ? "0 4px 12px rgba(0,0,0,0.2)"
+                  : "none",
               transition: "all 0.2s",
             }}
           >

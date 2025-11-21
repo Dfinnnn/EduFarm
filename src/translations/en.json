@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "product": "Product",
+    "videos": "Videos",
+    "forum": "Forum"
+  },
+  "header": {
+    "brand": "EduFarm",
+    "logout": "Logout"
+  },
+  "home": {
+    "hero": {
+      "title": "Welcome to EduFarm, {username}!",
+      "subtitle": "Free farming education for everyone. Learn, grow, and succeed!",
+      "aboutButton": "About Us"
+    },
+    "product": {
+      "title": "Introducing SmartFarm System",
+      "description": "Bringing smart farming to your doorstep. SmartFarm helps automate irrigation, monitor soil, and track your crops so you can grow healthier yields with less effort.",
+      "imageAlt": "EduFarm Product",
+      "featuresTitle": "What We Offer?",
+      "features": {
+        "soil": "Smart Soil Sensors",
+        "water": "Automated Irrigation System",
+        "dashboard": "Real-Time Dashboard",
+        "pest": "Pest Control",
+        "weather": "Weather Forecasting"
+      },
+      "learnMore": "Learn More About Our Product"
+    },
+    "videos": {
+      "title": "Featured Videos",
+      "subtitle": "Selected tutorials to kickstart your farming journey!",
+      "exploreButton": "View More Videos"
+    },
+    "interest": {
+      "title": "Interested in Our Gardening Automation?",
+      "subtitle": "Join the waitlist or get early access by filling out the form below!",
+      "alertSuccess": "Thank you for your interest!",
+      "form": {
+        "name": "Your Name",
+        "email": "Your Email",
+        "message": "Tell us why you're interested",
+        "submit": "Submit Interest"
+      }
+    }
+  },
+  "product": {
+    "title": "SmartFarm",
+    "intro": "Discover our range of smart farming hardware designed to make farming more efficient, sustainable, and easy to manage.",
+    "hardwareLine": "Our Smart Farming Hardware Range",
+    "pricingTitle": "Subscription Plans & Pricing",
+    "starter": {
+      "title": "Starter Package",
+      "desc": "Perfect for small gardens or new users.",
+      "monthlyPrice": "RM 2,499 / Monthly",
+      "annualPrice": "RM 24,990 / Yearly",
+      "note": "One-time installation + 12 months system access",
+      "cta": "Choose Starter"
+    },
+    "growth": {
+      "title": "Growth Package",
+      "desc": "Best for growing farms with ongoing support.",
+      "monthlyPrice": "RM 3,999 / Monthly",
+      "annualPrice": "RM 39,990 / Yearly",
+      "note": "One-time installation + 24 months system access",
+      "cta": "Choose Growth"
+    },
+    "custom": {
+      "title": "Custom Package",
+      "desc": "Tailor-made for your farm size and needs.",
+      "priceLabel": "Based on Quote",
+      "note": "Pricing depends on selected modules",
+      "cta": "Build Package"
+    },
+    "interest": {
+      "title": "Interested in SmartFarm Hardware?",
+      "desc": "You've selected a package! Fill out the form below to join the early access list or get a consultation for your chosen SmartFarm package!",
+      "namePlaceholder": "Your Name",
+      "emailPlaceholder": "Your Email",
+      "messagePlaceholder": "Specify your interest",
+      "submit": "Submit Interest",
+      "submitted": "✅ Successfully Submitted!"
+    },
+    "contactCta": "Contact Us for a Demo"
+  },
+  "billing": {
+    "monthly": "Monthly",
+    "annual": "Annual"
+  },
+  "about": {
+    "heroTitle": "About EduFarm",
+    "heroSubtitle": "Providing free, practical, and sustainable farming knowledge to all farmers and enthusiasts.",
+    "content": "EduFarm is a free learning hub dedicated to helping farmers and enthusiasts gain practical farming knowledge. We provide step-by-step guides, interactive videos, and expert tips to make farming education accessible to everyone.",
+    "cards": {
+      "missionTitle": "🌱 Our Mission",
+      "missionDesc": "Making sustainable farming knowledge free and easily accessible worldwide.",
+      "offerTitle": "📚 What We Offer",
+      "offerDesc": "Free tutorials, expert tips, and resources on modern farming practices.",
+      "joinTitle": "🤝 Join Us",
+      "joinDesc": "Join our growing community and share farming knowledge."
+    }
+  },
+  "videos": {
+    "title": "Explore Farming Videos",
+    "all": "All",
+    "categories": {
+      "tutorial": "Tutorial",
+      "gardening": "Gardening",
+      "hydroponic": "Hydroponic",
+      "smartfarm": "SmartFarm",
+      "education": "Education"
+    },
+    "cards": {
+      "watch": "Watch Video"
+    }
+  },
+  "forum": {
+    "heroTitle": "Welcome to Farmnity",
+    "heroSubtitle": "A professional community where farmers, students, and innovators share knowledge, tips, and experiences to grow together.",
+    "startDiscussion": "Start a Discussion",
+    "enterName": "Enter your name (optional)",
+    "writeSomething": "Write something...",
+    "post": "Post",
+    "recentPosts": "Recent Posts",
+    "noPosts": "No posts yet. Start a conversation!",
+    "writeReply": "Write a reply...",
+    "reply": "Reply"
+  }
+}

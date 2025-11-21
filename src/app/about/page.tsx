@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "@/hooks/useTranslations";
 
 export default function AboutPage() {
+  const { t } = useTranslations();
+
   return (
     <div>
       {/* Hero Section */}
@@ -48,8 +51,9 @@ export default function AboutPage() {
               textShadow: "2px 2px 8px rgba(0,0,0,0.5)",
             }}
           >
-             About EduFarm
+            {t("about.heroTitle")}
           </h1>
+
           <p
             style={{
               fontSize: "1.3rem",
@@ -58,8 +62,7 @@ export default function AboutPage() {
               lineHeight: "1.6",
             }}
           >
-            Empowering farmers and enthusiasts with free, practical, and
-            sustainable agricultural knowledge.
+            {t("about.heroSubtitle")}
           </p>
         </motion.div>
       </section>
@@ -81,13 +84,10 @@ export default function AboutPage() {
             marginBottom: "50px",
           }}
         >
-          EduFarm is a free learning hub dedicated to helping farmers and
-          enthusiasts gain practical agricultural knowledge.  
-          We provide step-by-step guides, interactive videos, and expert tips to
-          make farming education accessible for everyone.
+          {t("about.content")}
         </motion.p>
 
-        {/* Feature Cards with animation */}
+        {/* Feature Cards */}
         <div
           style={{
             display: "flex",
@@ -98,16 +98,16 @@ export default function AboutPage() {
         >
           {[
             {
-              title: "🌱 Our Mission",
-              desc: "To make sustainable farming knowledge free and accessible worldwide.",
+              title: t("about.cards.missionTitle"),
+              desc: t("about.cards.missionDesc"),
             },
             {
-              title: "📚 What We Offer",
-              desc: "Free tutorials, expert tips, and resources on modern farming practices.",
+              title: t("about.cards.offerTitle"),
+              desc: t("about.cards.offerDesc"),
             },
             {
-              title: "🤝 Join Us",
-              desc: "Be part of a growing community that learns and shares farming knowledge.",
+              title: t("about.cards.joinTitle"),
+              desc: t("about.cards.joinDesc"),
             },
           ].map((item, idx) => (
             <motion.div

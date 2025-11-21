@@ -1,0 +1,132 @@
+{
+  "nav": {
+    "home": "Laman Utama",
+    "about": "Tentang Kami",
+    "product": "Produk",
+    "videos": "Video",
+    "forum": "Forum"
+  },
+  "header": {
+    "brand": "EduFarm",
+    "logout": "Log Keluar"
+  },
+  "home": {
+    "hero": {
+      "title": "Selamat datang ke EduFarm, {username} !",
+      "subtitle": "Pendidikan pertanian percuma untuk semua. Belajar, berkembang, dan berjaya!",
+      "aboutButton": "Tentang Kami"
+    },
+    "product": {
+      "title": "Memperkenalkan Sistem SmartFarm",
+      "description": "Membawa pertanian pintar ke halaman anda. SmartFarm membantu mengautomasikan siraman, memantau tanah, dan menjejak tanaman anda supaya anda dapat menanam hasil yang lebih sihat dengan usaha yang lebih sedikit.",
+      "imageAlt": "Produk EduFarm",
+      "featuresTitle": "Apa Yang Ditawarkan?",
+      "features": {
+        "soil": "Sensor Tanah Pintar",
+        "water": "Sistem Siraman Automatik",
+        "dashboard": "Papan Pemuka Masa Nyata",
+        "pest": "Kawalan Perosak",
+        "weather": "Ramalan Cuaca"
+      },
+      "learnMore": "Ketahui Lebih Lanjut Tentang Produk Kami"
+    },
+    "videos": {
+      "title": "Video Pilihan",
+      "subtitle": "Tutorial terpilih untuk memulakan perjalanan pertanian anda!",
+      "exploreButton": "Lihat Lebih Banyak Video"
+    },
+    "interest": {
+      "title": "Berminat dengan Automasi Berkebun kami?",
+      "subtitle": "Sertai senarai menunggu atau dapatkan akses awal dengan mengisi borang di bawah!",
+      "alertSuccess": "Terima kasih atas minat anda!",
+      "form": {
+        "name": "Nama Anda",
+        "email": "Emel Anda",
+        "message": "Beritahu kami kenapa anda berminat",
+        "submit": "Hantar Minat"
+      }
+    }
+  },
+  "product": {
+    "title": "SmartFarm",
+    "intro": "Ketahui rangkaian perkakasan pertanian pintar kami, direka untuk menjadikan pertanian lebih cekap, mampan, dan mudah diurus.",
+    "hardwareLine": "Rangkaian Perkakasan Pertanian Pintar Kami",
+    "pricingTitle": "Pakej Langganan & Harga",
+    "starter": {
+      "title": "Pakej Permulaan",
+      "desc": "Sesuai untuk kebun kecil atau pengguna baru.",
+      "monthlyPrice": "RM 2,499 / Bulanan",
+      "annualPrice": "RM 24,990 / Tahunan",
+      "note": "Pemasangan sekali + akses sistem selama 12 bulan",
+      "cta": "Pilih Permulaan"
+    },
+    "growth": {
+      "title": "Pakej Pertumbuhan",
+      "desc": "Terbaik untuk ladang yang sedang berkembang dengan sokongan berterusan.",
+      "monthlyPrice": "RM 3,999 / Bulanan",
+      "annualPrice": "RM 39,990 / Tahunan",
+      "note": "Pemasangan sekali + akses sistem selama 24 bulan",
+      "cta": "Pilih Pertumbuhan"
+    },
+    "custom": {
+      "title": "Pakej Tersuai",
+      "desc": "Sesuaikan mengikut saiz dan keperluan ladang anda.",
+      "priceLabel": "Berdasarkan Sebut Harga",
+      "note": "Harga bergantung pada modul yang dipilih",
+      "cta": "Bina Pakej"
+    },
+    "interest": {
+      "title": "Berminat dengan Perkakasan SmartFarm?",
+      "desc": "Anda telah memilih pakej! Isi borang di bawah untuk menyertai senarai akses awal atau dapatkan sesi konsultasi untuk pakej SmartFarm pilihan anda!",
+      "namePlaceholder": "Nama Anda",
+      "emailPlaceholder": "Emel Anda",
+      "messagePlaceholder": "Nyatakan minat anda",
+      "submit": "Hantar Minat",
+      "submitted": "✅ Berjaya Dihantar!"
+    },
+    "contactCta": "Hubungi Kami untuk Demo"
+  },
+  "billing": {
+    "monthly": "Bulanan",
+    "annual": "Tahunan"
+  },
+  "about": {
+    "heroTitle": "Tentang EduFarm",
+    "heroSubtitle": "Memberi ilmu pertanian percuma, praktikal, dan mampan kepada semua petani dan peminat pertanian.",
+    "content": "EduFarm ialah pusat pembelajaran percuma yang berdedikasi untuk membantu petani dan peminat mendapatkan ilmu pertanian yang praktikal. Kami menyediakan panduan langkah demi langkah, video interaktif, dan tip pakar untuk memudahkan pembelajaran pertanian kepada semua.",
+    "cards": {
+      "missionTitle": "🌱 Misi Kami",
+      "missionDesc": "Menjadikan ilmu pertanian mampan percuma dan mudah diakses di seluruh dunia.",
+      "offerTitle": "📚 Apa Yang Kami Tawarkan",
+      "offerDesc": "Tutorial percuma, tip pakar, dan sumber mengenai amalan pertanian moden.",
+      "joinTitle": "🤝 Sertai Kami",
+      "joinDesc": "Sertai komuniti yang berkembang dan berkongsi ilmu pertanian."
+    }
+  },
+  "videos": {
+    "title": "Terokai Video Pertanian",
+    "all": "Semua",
+    "categories": {
+      "tutorial": "Tutorial",
+      "gardening": "Berkebun",
+      "hydroponic": "Hidroponik",
+      "smartfarm": "SmartFarm",
+      "education": "Pendidikan"
+    },
+    "cards": {
+      "watch": "Tonton Video"
+    }
+  },
+  "forum": {
+    "heroTitle": "Selamat Datang ke Farmnity",
+    "heroSubtitle": "Komuniti profesional di mana petani, pelajar, dan inovator berkongsi ilmu, tip, dan pengalaman untuk berkembang bersama.",
+    "startDiscussion": "Mulakan Perbincangan",
+    "enterName": "Masukkan nama anda (pilihan)",
+    "writeSomething": "Tulis sesuatu...",
+    "post": "Hantar",
+    "recentPosts": "Kiriman Terkini",
+    "noPosts": "Tiada kiriman lagi. Mulakan perbualan!",
+    "writeReply": "Tulis balasan...",
+    "reply": "Balas"
+  }
+}
