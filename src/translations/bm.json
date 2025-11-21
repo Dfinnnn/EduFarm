@@ -12,13 +12,13 @@
   },
   "home": {
     "hero": {
-      "title": "Selamat datang ke EduFarm, {username} !",
+      "title": "Selamat datang ke EduFarm, {username}!",
       "subtitle": "Pendidikan pertanian percuma untuk semua. Belajar, berkembang, dan berjaya!",
       "aboutButton": "Tentang Kami"
     },
     "product": {
       "title": "Memperkenalkan Sistem SmartFarm",
-      "description": "Membawa pertanian pintar ke halaman anda. SmartFarm membantu mengautomasikan siraman, memantau tanah, dan menjejak tanaman anda supaya anda dapat menanam hasil yang lebih sihat dengan usaha yang lebih sedikit.",
+      "description": "Membawa pertanian pintar ke halaman anda. SmartFarm membantu mengautomasikan siraman, memantau tanah, dan menjejak tanaman supaya anda dapat menanam hasil yang lebih sihat dengan usaha yang lebih sedikit.",
       "imageAlt": "Produk EduFarm",
       "featuresTitle": "Apa Yang Ditawarkan?",
       "features": {
@@ -54,26 +54,51 @@
     "pricingTitle": "Pakej Langganan & Harga",
     "starter": {
       "title": "Pakej Permulaan",
-      "desc": "Sesuai untuk kebun kecil atau pengguna baru.",
+      "desc": "Sesuai untuk kebun kecil atau pengguna baru. Termasuk perkakasan asas pertanian pintar dan latihan asas untuk memulakan.",
       "monthlyPrice": "RM 2,499 / Bulanan",
       "annualPrice": "RM 24,990 / Tahunan",
       "note": "Pemasangan sekali + akses sistem selama 12 bulan",
-      "cta": "Pilih Permulaan"
+      "cta": "Pilih Permulaan",
+      "features": [
+        "Pemasangan pertama oleh ACRE (minimum 1 ekar)",
+        "1x Set Lengkap Fertigasi",
+        "Peranti Pengesan Perosak",
+        "Automasi Sensor Pintar",
+        "Konsultasi & latihan 5 bulan",
+        "10 lawatan tapak",
+        "Akses Papan Pemuka (12 bulan)"
+      ]
     },
     "growth": {
       "title": "Pakej Pertumbuhan",
-      "desc": "Terbaik untuk ladang yang sedang berkembang dengan sokongan berterusan.",
+      "desc": "Terbaik untuk ladang yang sedang berkembang dengan sokongan berterusan. Termasuk semua dalam Pakej Permulaan dan sokongan tambahan.",
       "monthlyPrice": "RM 3,999 / Bulanan",
       "annualPrice": "RM 39,990 / Tahunan",
       "note": "Pemasangan sekali + akses sistem selama 24 bulan",
-      "cta": "Pilih Pertumbuhan"
+      "cta": "Pilih Pertumbuhan",
+      "features": [
+        "Semua dalam Pakej Permulaan",
+        "Sokongan sistem lanjutan selama 24 bulan",
+        "Keutamaan dalam penyelesaian masalah",
+        "Semakan pengoptimuman tahunan",
+        "Diskaun untuk beg fertigasi pukal",
+        "Latihan tenaga kerja pilihan"
+      ]
     },
     "custom": {
       "title": "Pakej Tersuai",
-      "desc": "Sesuaikan mengikut saiz dan keperluan ladang anda.",
+      "desc": "Disesuaikan mengikut saiz dan keperluan ladang anda. Bina pakej anda dengan memilih modul dan perkhidmatan yang diperlukan.",
       "priceLabel": "Berdasarkan Sebut Harga",
       "note": "Harga bergantung pada modul yang dipilih",
-      "cta": "Bina Pakej"
+      "cta": "Bina Pakej",
+      "features": [
+        "Modul Fertigasi (RM20/beg × kuantiti)",
+        "Sistem Pengesan Perosak",
+        "Automasi Sensor Pintar",
+        "Lawatan tapak (RM150/lawatan)",
+        "Latihan tenaga kerja (berdasarkan sebut harga)",
+        "Pilihan langganan 12m atau 24m"
+      ]
     },
     "interest": {
       "title": "Berminat dengan Perkakasan SmartFarm?",

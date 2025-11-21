@@ -54,26 +54,51 @@
     "pricingTitle": "Subscription Plans & Pricing",
     "starter": {
       "title": "Starter Package",
-      "desc": "Perfect for small gardens or new users.",
+      "desc": "Perfect for small gardens or new users. Includes essential smart farming hardware and basic training to get started.",
       "monthlyPrice": "RM 2,499 / Monthly",
       "annualPrice": "RM 24,990 / Yearly",
       "note": "One-time installation + 12 months system access",
-      "cta": "Choose Starter"
+      "cta": "Choose Starter",
+      "features": [
+        "First-time installation by ACRE (minimum 1 acre)",
+        "1x Fertigation Complete Set",
+        "Pest Detection Device",
+        "Smart Sensor Automation",
+        "5-month consultation & training",
+        "10 on-site visits",
+        "Dashboard Access (12 months)"
+      ]
     },
     "growth": {
       "title": "Growth Package",
-      "desc": "Best for growing farms with ongoing support.",
+      "desc": "Best for growing farms with ongoing support. Includes everything in the Starter Package plus extended support and optimization services.",
       "monthlyPrice": "RM 3,999 / Monthly",
       "annualPrice": "RM 39,990 / Yearly",
       "note": "One-time installation + 24 months system access",
-      "cta": "Choose Growth"
+      "cta": "Choose Growth",
+      "features": [
+        "Everything in Starter Package",
+        "Extended 24-month system support",
+        "Priority troubleshooting",
+        "Annual optimization review",
+        "Discount for bulk fertigation bags",
+        "Optional manpower training"
+      ]
     },
     "custom": {
       "title": "Custom Package",
-      "desc": "Tailor-made for your farm size and needs.",
+      "desc": "Tailor-made for your farm size and needs. Build your package by selecting desired modules and services.",
       "priceLabel": "Based on Quotation",
       "note": "Pricing depends on selected modules",
-      "cta": "Build Package"
+      "cta": "Build Package",
+      "features": [
+        "Fertigation Module (RM20/bag × qty)",
+        "Pest Detection System",
+        "Smart Sensor Automation",
+        "On-site trips (RM150/trip)",
+        "Manpower training (quotation based)",
+        "12m or 24m subscription options"
+      ]
     },
     "interest": {
       "title": "Interested in SmartFarm Hardware?",

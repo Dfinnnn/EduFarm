@@ -13,7 +13,7 @@ export function useTranslations() {
   const { lang } = useApp();
   const dict: any = lang === "en" ? en : bm;
 
-  function t(key: string, fallback?: string) {
+  function t(key: string, fallback?: any) {
     if (!key) return fallback ?? "";
     const parts = key.split(".");
     let cur: any = dict;
@@ -24,7 +24,10 @@ export function useTranslations() {
         return fallback ?? key;
       }
     }
-    return typeof cur === "string" ? cur : fallback ?? key;
+
+    if (Array.isArray(cur)) return cur;
+    if (typeof cur === "object") return cur;
+    return cur ?? fallback ?? key;
   }
 
   return { t, lang };
