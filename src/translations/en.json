@@ -71,7 +71,7 @@
     "custom": {
       "title": "Custom Package",
       "desc": "Tailor-made for your farm size and needs.",
-      "priceLabel": "Based on Quote",
+      "priceLabel": "Based on Quotation",
       "note": "Pricing depends on selected modules",
       "cta": "Build Package"
     },
