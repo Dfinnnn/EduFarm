@@ -21,11 +21,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           margin: 0,
           fontFamily: "Inter, sans-serif",
           background: "#f5f5f5",
+          width: "100%",
+          overflowX: "hidden", // prevents black bars
         }}
       >
         <AppProvider>
           {!hideUI && <Header />}
-          <main>{children}</main>
+
+          <main
+            style={{
+              width: "100%",
+              maxWidth: "100%",
+              margin: 0,
+              padding: 0,
+              overflowX: "hidden",
+            }}
+          >
+            {children}
+          </main>
+
           {!hideUI && <Footer />}
           {!hideUI && <Chatbot />}
         </AppProvider>

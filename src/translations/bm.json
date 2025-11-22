@@ -18,21 +18,21 @@
     },
     "product": {
       "title": "Memperkenalkan Sistem SmartFarm",
-      "description": "Membawa pertanian pintar ke halaman anda. SmartFarm membantu mengautomasikan siraman, memantau tanah, dan menjejak tanaman supaya anda dapat menanam hasil yang lebih sihat dengan usaha yang lebih sedikit.",
+      "description": "Membawa pertanian ke halaman anda. SmartFarm membantu mengautomasikan siraman, memantau tanah, dan menjejak tanaman supaya anda dapat menanam hasil yang lebih sihat dengan usaha yang lebih sedikit.",
       "imageAlt": "Produk EduFarm",
       "featuresTitle": "Apa Yang Ditawarkan?",
       "features": {
         "soil": "Sensor Tanah Pintar",
         "water": "Sistem Siraman Automatik",
-        "dashboard": "Papan Pemuka Masa Nyata",
-        "pest": "Kawalan Perosak",
-        "weather": "Ramalan Cuaca"
+        "dashboard": "Panel Kawalan secara Langsung",
+        "pest": "Sistem Kawalan Serangga Perosak",
+        "weather": "Sistem Ramalan Cuaca"
       },
       "learnMore": "Ketahui Lebih Lanjut Tentang Produk Kami"
     },
     "videos": {
       "title": "Video Pilihan",
-      "subtitle": "Tutorial terpilih untuk memulakan perjalanan pertanian anda!",
+      "subtitle": "Tutorial terpilih untuk menambah ilmu pengalaman pertanian anda!",
       "exploreButton": "Lihat Lebih Banyak Video"
     },
     "interest": {
@@ -49,8 +49,22 @@
   },
   "product": {
     "title": "SmartFarm",
-    "intro": "Ketahui rangkaian perkakasan pertanian pintar kami, direka untuk menjadikan pertanian lebih cekap, mampan, dan mudah diurus.",
+    "intro": "Terokai rangkaian peralatan pertanian pintar kami yang direka untuk menjadikan kerja ladang lebih cekap, mesra alam, dan senang diurus.",
     "hardwareLine": "Rangkaian Perkakasan Pertanian Pintar Kami",
+    "hardware": {
+      "soilSensor": {
+        "title": "Sensor Tanah Pintar",
+        "desc": "Sensor pintar yang mengukur kelembapan tanah dan tahap nutrien untuk menyokong keputusan pertanian automatik."
+      },
+      "wateringController": {
+        "title": "Pengawal Siraman Automatik",
+        "desc": "Pengawal siraman pintar yang mengawal aliran air berdasarkan data sensor tanah masa nyata."
+      },
+      "pestDevice": {
+        "title": "Peranti Pengesan Serangga Perosak",
+        "desc": "Modul kamera berasaskan AI yang mengesan aktiviti perosak awal dan memberi amaran segera kepada petani."
+      }
+    },
     "pricingTitle": "Pakej Langganan & Harga",
     "starter": {
       "title": "Pakej Permulaan",
@@ -60,13 +74,13 @@
       "note": "Pemasangan sekali + akses sistem selama 12 bulan",
       "cta": "Pilih Permulaan",
       "features": [
-        "Pemasangan pertama oleh ACRE (minimum 1 ekar)",
+        "Pemasangan pertama oleh Ekar (minimum 1 ekar)",
         "1x Set Lengkap Fertigasi",
-        "Peranti Pengesan Perosak",
+        "Peranti Pengesan Serangga Perosak",
         "Automasi Sensor Pintar",
         "Konsultasi & latihan 5 bulan",
-        "10 lawatan tapak",
-        "Akses Papan Pemuka (12 bulan)"
+        "10 lawatan ke tapak",
+        "Akses kepada panel kawalan (12 bulan)"
       ]
     },
     "growth": {
@@ -81,35 +95,39 @@
         "Sokongan sistem lanjutan selama 24 bulan",
         "Keutamaan dalam penyelesaian masalah",
         "Semakan pengoptimuman tahunan",
-        "Diskaun untuk beg fertigasi pukal",
-        "Latihan tenaga kerja pilihan"
+        "Semakan prestasi tahunan",
+        "Latihan tenaga kerja"
       ]
     },
     "custom": {
-      "title": "Pakej Tersuai",
+      "title": "Pakej Khas",
       "desc": "Disesuaikan mengikut saiz dan keperluan ladang anda. Bina pakej anda dengan memilih modul dan perkhidmatan yang diperlukan.",
       "priceLabel": "Berdasarkan Sebut Harga",
       "note": "Harga bergantung pada modul yang dipilih",
       "cta": "Bina Pakej",
       "features": [
         "Modul Fertigasi (RM20/beg × kuantiti)",
-        "Sistem Pengesan Perosak",
+        "Sistem Pengesan Serangga Perosak",
         "Automasi Sensor Pintar",
         "Lawatan tapak (RM150/lawatan)",
         "Latihan tenaga kerja (berdasarkan sebut harga)",
-        "Pilihan langganan 12m atau 24m"
+        "Pilihan langganan 12 bulan atau 24 bulan"
       ]
     },
+
     "interest": {
       "title": "Berminat dengan Perkakasan SmartFarm?",
       "desc": "Anda telah memilih pakej! Isi borang di bawah untuk menyertai senarai akses awal atau dapatkan sesi konsultasi untuk pakej SmartFarm pilihan anda!",
+      "selectedPackage": "Pakej Dipilih",
       "namePlaceholder": "Nama Anda",
       "emailPlaceholder": "Emel Anda",
-      "messagePlaceholder": "Nyatakan minat anda",
-      "submit": "Hantar Minat",
+      "phonePlaceholder": "Nombor Telefon",
+      "messagePlaceholder": "Kenapa anda berminat dengan produk kami ",
+      "submit": "Hantar ",
       "submitted": "✅ Berjaya Dihantar!"
     },
-    "contactCta": "Hubungi Kami untuk Demo"
+
+    "contactCta": "Hubungi Kami untuk Demonstrasi"
   },
   "billing": {
     "monthly": "Bulanan",
@@ -123,7 +141,7 @@
       "missionTitle": "🌱 Misi Kami",
       "missionDesc": "Menjadikan ilmu pertanian mampan percuma dan mudah diakses di seluruh dunia.",
       "offerTitle": "📚 Apa Yang Kami Tawarkan",
-      "offerDesc": "Tutorial percuma, tip pakar, dan sumber mengenai amalan pertanian moden.",
+      "offerDesc": "Tutorial percuma, tip pakar, alatan automasi dan sumber mengenai amalan pertanian moden.",
       "joinTitle": "🤝 Sertai Kami",
       "joinDesc": "Sertai komuniti yang berkembang dan berkongsi ilmu pertanian."
     }
@@ -153,5 +171,31 @@
     "noPosts": "Tiada kiriman lagi. Mulakan perbualan!",
     "writeReply": "Tulis balasan...",
     "reply": "Balas"
+  },
+  "auth": {
+    "login": {
+      "title": "Selamat Kembali ke EduFarm 👋",
+      "subtitle": "Sila log masuk ke akaun anda",
+      "emailLabel": "Emel",
+      "emailPlaceholder": "anda@contoh.com",
+      "passwordLabel": "Kata Laluan",
+      "passwordPlaceholder": "••••••••",
+      "buttonLogin": "Log Masuk",
+      "buttonLoading": "Sedang log masuk...",
+      "noAccount": "Tiada akaun?",
+      "signupLink": "Daftar",
+      "success": "Log masuk berjaya!"
+    }
+  },
+  "signup": {
+    "title": "Cipta Akaun EduFarm Anda 🌾",
+    "username": "Nama Pengguna",
+    "company": "Syarikat",
+    "email": "Emel",
+    "password": "Kata Laluan",
+    "button": "Daftar",
+    "loading": "Sedang Mendaftar...",
+    "alreadyAccount": "Sudah mempunyai akaun?",
+    "login": "Log Masuk"
   }
 }

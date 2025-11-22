@@ -36,14 +36,19 @@
       "exploreButton": "View More Videos"
     },
     "interest": {
-      "title": "Interested in Our Gardening Automation?",
-      "subtitle": "Join the waitlist or get early access by filling out the form below!",
+      "title": "Interested in Our SmartFarm Automation?",
+      "subtitle": "Fill out the form below to get early access or join the waitlist!",
       "alertSuccess": "Thank you for your interest!",
       "form": {
-        "name": "Your Name",
-        "email": "Your Email",
-        "message": "Tell us why you're interested",
-        "submit": "Submit Interest"
+        "name": "Full Name",
+        "email": "Email Address",
+        "message": "Reason for Interest",
+        "submit": "Submit"
+      },
+      "ctaForm": {
+        "title": "Request SmartFarm Demo or Early Access",
+        "description": "Fill in your details and we’ll get in touch soon with more information on SmartFarm packages.",
+        "success": "🎉 Your request has been successfully submitted!"
       }
     }
   },
@@ -51,6 +56,20 @@
     "title": "SmartFarm",
     "intro": "Discover our range of smart farming hardware designed to make farming more efficient, sustainable, and easy to manage.",
     "hardwareLine": "Our Smart Farming Hardware Range",
+    "hardware": {
+      "soilSensor": {
+        "title": "Smart Soil Sensors",
+        "desc": "Smart sensors that measure soil moisture and nutrient levels to support automated farming decisions."
+      },
+      "wateringController": {
+        "title": "Automatic Watering Controller",
+        "desc": "A smart irrigation controller that regulates water flow based on real-time soil sensor data."
+      },
+      "pestDevice": {
+        "title": "Pest Detection Device",
+        "desc": "An AI-enabled camera module that detects pest activity early and alerts farmers instantly."
+      }
+    },
     "pricingTitle": "Subscription Plans & Pricing",
     "starter": {
       "title": "Starter Package",
@@ -60,7 +79,7 @@
       "note": "One-time installation + 12 months system access",
       "cta": "Choose Starter",
       "features": [
-        "First-time installation by ACRE (minimum 1 acre)",
+        "First-time installation by acre (minimum 1 acre)",
         "1x Fertigation Complete Set",
         "Pest Detection Device",
         "Smart Sensor Automation",
@@ -97,16 +116,16 @@
         "Smart Sensor Automation",
         "On-site trips (RM150/trip)",
         "Manpower training (quotation based)",
-        "12m or 24m subscription options"
+        "12month or 24month subscription options"
       ]
     },
     "interest": {
       "title": "Interested in SmartFarm Hardware?",
-      "desc": "You've selected a package! Fill out the form below to join the early access list or get a consultation for your chosen SmartFarm package!",
-      "namePlaceholder": "Your Name",
-      "emailPlaceholder": "Your Email",
-      "messagePlaceholder": "Specify your interest",
-      "submit": "Submit Interest",
+      "desc": "You've selected a package! Fill out the form below to join the early access list or request a consultation for your chosen SmartFarm package!",
+      "namePlaceholder": "Full Name",
+      "emailPlaceholder": "Email Address",
+      "messagePlaceholder": "Reason for Interest",
+      "submit": "Submit",
       "submitted": "✅ Successfully Submitted!"
     },
     "contactCta": "Contact Us for a Demo"
@@ -153,5 +172,31 @@
     "noPosts": "No posts yet. Start a conversation!",
     "writeReply": "Write a reply...",
     "reply": "Reply"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome Back to EduFarm 👋",
+      "subtitle": "Please log in to your account",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "••••••••",
+      "buttonLogin": "Login",
+      "buttonLoading": "Logging in...",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign Up",
+      "success": "Login successful!"
+    }
+  },
+  "signup": {
+    "title": "Create Your EduFarm Account 🌾",
+    "username": "Username",
+    "company": "Company",
+    "email": "Email",
+    "password": "Password",
+    "button": "Sign Up",
+    "loading": "Creating Account...",
+    "alreadyAccount": "Already have an account?",
+    "login": "Login"
   }
 }

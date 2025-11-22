@@ -21,12 +21,12 @@ export default function ProductPage() {
     billing === "monthly"
       ? t("product.starter.monthlyPrice")
       : t("product.starter.annualPrice");
+
   const growthPrice =
     billing === "monthly"
       ? t("product.growth.monthlyPrice")
       : t("product.growth.annualPrice");
 
-  // Render features with proper color handling
   const renderFeatures = (packageKey: string) => {
     let raw: any;
     try {
@@ -60,7 +60,7 @@ export default function ProductPage() {
   };
 
   return (
-    <section className="min-h-screen bg-green-50 py-16 px-6 md:px-16">
+    <section className="min-h-screen bg-green-50 py-16 px-4 sm:px-6 md:px-10 lg:px-16">
       {/* Title */}
       <motion.h1
         initial={{ opacity: 0, y: -30 }}
@@ -71,12 +71,11 @@ export default function ProductPage() {
         {t("product.title")}
       </motion.h1>
 
-      {/* Intro */}
       <p className="text-center text-gray-700 mb-12 text-lg max-w-2xl mx-auto">
         {t("product.intro")}
       </p>
 
-      {/* Dashboard Demo Video */}
+      {/* Dashboard Demo */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -88,7 +87,7 @@ export default function ProductPage() {
         </div>
       </motion.div>
 
-      {/* Hardware Line */}
+      {/* Hardware Title */}
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,24 +97,23 @@ export default function ProductPage() {
         {t("product.hardwareLine")}
       </motion.h2>
 
-      {/* Product Gallery */}
+      {/* Image Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
-        {/* Three image cards */}
         {[
           {
             img: "/soilsensor_mockup.jpg",
-            title: t("product.starter.title"),
-            desc: t("product.starter.desc"),
+            title: t("product.hardware.soilSensor.title"),
+            desc: t("product.hardware.soilSensor.desc"),
           },
           {
             img: "/fertigation_mockup.jpg",
-            title: "Automatic Watering Controller",
-            desc: "A smart irrigation controller that regulates water flow based on soil sensor data — ensuring your plants get exactly what they need.",
+            title: t("product.hardware.wateringController.title"),
+            desc: t("product.hardware.wateringController.desc"),
           },
           {
             img: "/pestdetection_mockup.jpg",
-            title: "Pest Detection Device",
-            desc: "An AI-enabled camera module that detects pest activity early and alerts farmers through the EduFarm dashboard in real time.",
+            title: t("product.hardware.pestDevice.title"),
+            desc: t("product.hardware.pestDevice.desc"),
           },
         ].map((item, i) => (
           <motion.div
@@ -146,7 +144,6 @@ export default function ProductPage() {
         {t("product.pricingTitle")}
       </motion.h2>
 
-      {/* Billing Toggle */}
       <div className="flex justify-center mb-8">
         <div className="bg-white shadow-md rounded-full p-2 flex gap-2 border border-green-300">
           {["monthly", "annual"].map((type) => (
@@ -165,7 +162,7 @@ export default function ProductPage() {
         </div>
       </div>
 
-      {/* Packages */}
+      {/* Package Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {["starter", "growth", "custom"].map((pkg) => {
           const isGrowth = pkg === "growth";
@@ -187,7 +184,6 @@ export default function ProductPage() {
                 {t(`product.${pkg}.desc`)}
               </p>
 
-              {/* Price */}
               <p className="text-4xl font-extrabold mb-4">
                 {pkg === "starter"
                   ? starterPrice
@@ -195,20 +191,15 @@ export default function ProductPage() {
                   ? growthPrice
                   : t("product.custom.priceLabel")}
               </p>
+
               <p className={`mb-6 text-sm ${isGrowth ? "opacity-90" : "text-gray-500"}`}>
                 {t(`product.${pkg}.note`)}
               </p>
 
-              {/* Features */}
-              <ul
-                className={`mb-6 space-y-2 ${
-                  isGrowth ? "text-white" : "text-gray-700"
-                }`}
-              >
+              <ul className={`mb-6 space-y-2 ${isGrowth ? "text-white" : "text-gray-700"}`}>
                 {renderFeatures(pkg)}
               </ul>
 
-              {/* CTA Button */}
               <button
                 onClick={() => {
                   setSelectedPackage(t(`product.${pkg}.title`));
@@ -229,7 +220,70 @@ export default function ProductPage() {
         })}
       </div>
 
-      {/* Interest Form and CTA below unchanged */}
+      {/* Interest Form */}
+      <section
+        id="interestForm"
+        className="mt-24 bg-white rounded-3xl shadow-xl max-w-4xl mx-auto p-10 border border-green-300"
+      >
+        <h2 className="text-3xl font-bold text-green-800 text-center mb-6">
+          {t("product.interest.title")}
+        </h2>
+
+        <p className="text-center text-gray-800 mb-10 max-w-xl mx-auto">
+          {t("product.interest.desc")}
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {selectedPackage && (
+            <div className="bg-green-50 border border-green-400 rounded-xl p-4 text-center text-green-900 font-semibold shadow-sm">
+              {t("product.interest.selectedPackage")}: {selectedPackage}
+            </div>
+          )}
+
+          {/* Name */}
+          <div>
+            <input
+              type="text"
+              required
+              className="w-full p-3 border border-green-500 rounded-xl focus:ring-2 focus:ring-green-600 outline-none text-gray-900"
+              placeholder={t("product.interest.namePlaceholder")}
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <input
+              type="email"
+              required
+              className="w-full p-3 border border-green-500 rounded-xl focus:ring-2 focus:ring-green-600 outline-none text-gray-900"
+              placeholder={t("product.interest.emailPlaceholder")}
+            />
+          </div>
+
+          {/* Message */}
+          <div>
+            <textarea
+              rows={4}
+              className="w-full p-3 border border-green-500 rounded-xl focus:ring-2 focus:ring-green-600 outline-none text-gray-900"
+              placeholder={t("product.interest.messagePlaceholder")}
+            />
+          </div>
+
+          {/* Submit */}
+          <button
+            type="submit"
+            className="w-full py-3 bg-green-700 text-white font-semibold rounded-full hover:bg-green-800 transition shadow-lg"
+          >
+            {t("product.interest.submit")}
+          </button>
+
+          {submitted && (
+            <p className="text-center text-green-700 font-bold mt-4">
+              {t("product.interest.submitted")}
+            </p>
+          )}
+        </form>
+      </section>
     </section>
   );
 }

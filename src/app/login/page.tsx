@@ -11,7 +11,39 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [lang, setLang] = useState<"en" | "bm">("en");
+
   const router = useRouter();
+
+  // 🔥 Simple inline translations
+  const t = {
+    en: {
+      title: "Welcome Back to EduFarm 👋",
+      subtitle: "Please log in to your account",
+      email: "Email",
+      emailPH: "you@example.com",
+      password: "Password",
+      passwordPH: "••••••••",
+      login: "Login",
+      loading: "Logging in...",
+      noAccount: "Don't have an account?",
+      signup: "Sign Up",
+    },
+    bm: {
+      title: "Selamat Datang ke EduFarm 👋",
+      subtitle: "Sila log masuk ke akaun anda",
+      email: "Emel",
+      emailPH: "anda@contoh.com",
+      password: "Kata Laluan",
+      passwordPH: "••••••••",
+      login: "Log Masuk",
+      loading: "Sedang memproses...",
+      noAccount: "Tiada akaun?",
+      signup: "Daftar",
+    },
+  };
+
+  const text = t[lang];
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,13 +62,33 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex h-screen items-center justify-center overflow-hidden">
-      {/* 🖼 Background Image */}
+      {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url('/login_bg.jpg')` }}
       />
 
-      {/* 🔒 Login Form */}
+      {/* Language Switch */}
+      <div className="absolute top-4 right-4 z-20 flex gap-2">
+        <button
+          className={`px-3 py-1 rounded ${
+            lang === "en" ? "bg-green-600 text-white" : "bg-white text-black"
+          }`}
+          onClick={() => setLang("en")}
+        >
+          EN
+        </button>
+        <button
+          className={`px-3 py-1 rounded ${
+            lang === "bm" ? "bg-green-600 text-white" : "bg-white text-black"
+          }`}
+          onClick={() => setLang("bm")}
+        >
+          BM
+        </button>
+      </div>
+
+      {/* Login Box */}
       <motion.form
         onSubmit={handleLogin}
         initial={{ y: 40, opacity: 0 }}
@@ -45,19 +97,17 @@ export default function LoginPage() {
         className="relative bg-white/90 p-10 rounded-2xl shadow-xl w-96 text-center backdrop-blur-sm border border-green-200 z-10"
       >
         <h1 className="text-3xl font-extrabold mb-4 text-green-700">
-          Welcome Back to EduFarm 👋
+          {text.title}
         </h1>
-        <p className="text-sm text-gray-800 mb-6">
-          Please log in to your account
-        </p>
+        <p className="text-sm text-gray-800 mb-6">{text.subtitle}</p>
 
         <div className="mb-4 text-left">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
-            Email
+            {text.email}
           </label>
           <input
             type="email"
-            placeholder="you@example.com"
+            placeholder={text.emailPH}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400"
@@ -67,11 +117,11 @@ export default function LoginPage() {
 
         <div className="mb-6 text-left">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
-            Password
+            {text.password}
           </label>
           <input
             type="password"
-            placeholder="••••••••"
+            placeholder={text.passwordPH}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400"
@@ -98,16 +148,16 @@ export default function LoginPage() {
               : "bg-green-600 hover:bg-green-700"
           }`}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? text.loading : text.login}
         </button>
 
         <p className="mt-5 text-sm text-gray-800">
-          Don’t have an account?{" "}
+          {text.noAccount}{" "}
           <a
             href="/signup"
             className="text-green-600 font-semibold hover:underline"
           >
-            Sign Up
+            {text.signup}
           </a>
         </p>
       </motion.form>
