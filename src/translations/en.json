@@ -122,6 +122,7 @@
     "interest": {
       "title": "Interested in SmartFarm Hardware?",
       "desc": "You've selected a package! Fill out the form below to join the early access list or request a consultation for your chosen SmartFarm package!",
+      "selectedPackage": "Selected Package",
       "namePlaceholder": "Full Name",
       "emailPlaceholder": "Email Address",
       "messagePlaceholder": "Reason for Interest",
