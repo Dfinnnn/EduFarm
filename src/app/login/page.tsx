@@ -49,6 +49,7 @@ export default function LoginPage() {
     e.preventDefault();
     setErrorMsg("");
     setLoading(true);
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("✅ Login successful!");
@@ -101,6 +102,7 @@ export default function LoginPage() {
         </h1>
         <p className="text-sm text-gray-800 mb-6">{text.subtitle}</p>
 
+        {/* Email */}
         <div className="mb-4 text-left">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
             {text.email}
@@ -115,6 +117,7 @@ export default function LoginPage() {
           />
         </div>
 
+        {/* Password */}
         <div className="mb-6 text-left">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
             {text.password}
@@ -129,6 +132,7 @@ export default function LoginPage() {
           />
         </div>
 
+        {/* Error */}
         {errorMsg && (
           <motion.p
             className="text-red-700 mb-3 text-sm font-medium"
@@ -139,6 +143,7 @@ export default function LoginPage() {
           </motion.p>
         )}
 
+        {/* Button */}
         <button
           type="submit"
           disabled={loading}
@@ -147,16 +152,14 @@ export default function LoginPage() {
               ? "bg-green-300 cursor-not-allowed"
               : "bg-green-600 hover:bg-green-700"
           }`}
-        >
+          >
           {loading ? text.loading : text.login}
         </button>
 
+        {/* Footer */}
         <p className="mt-5 text-sm text-gray-800">
           {text.noAccount}{" "}
-          <a
-            href="/signup"
-            className="text-green-600 font-semibold hover:underline"
-          >
+          <a href="/signup" className="text-green-600 font-semibold hover:underline">
             {text.signup}
           </a>
         </p>

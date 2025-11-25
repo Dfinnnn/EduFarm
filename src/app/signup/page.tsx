@@ -15,14 +15,11 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // language state (local, does not touch routes)
+  // local language state
   const [lang, setLang] = useState<"en" | "bm">("en");
 
-  // inline translations (simple, self-contained)
-  const translations: Record<
-    "en" | "bm",
-    Record<string, string>
-  > = {
+  // translations
+  const translations: Record<"en" | "bm", Record<string, string>> = {
     en: {
       title: "🌾 Create Your EduFarm Account",
       subtitle: "Sign up to start automating and learning",
@@ -57,11 +54,12 @@ export default function SignupPage() {
     },
   };
 
-  const t = (k: string) => translations[lang][k] ?? k;
+  const t = (key: string) => translations[lang][key] ?? key;
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -88,13 +86,14 @@ export default function SignupPage() {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen overflow-hidden">
-      {/* subtle background image */}
+
+      {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url('/signup_bg.jpg')` }}
       />
 
-      {/* Language toggle top-right (local only) */}
+      {/* Language toggle */}
       <div className="absolute top-5 right-5 flex gap-2 z-20">
         <button
           onClick={() => setLang("en")}
@@ -118,7 +117,7 @@ export default function SignupPage() {
         </button>
       </div>
 
-      {/* Form container — matches Login style: subtle frosted card, centered */}
+      {/* Form */}
       <motion.form
         onSubmit={handleSignup}
         initial={{ opacity: 0, y: 40 }}
@@ -141,7 +140,7 @@ export default function SignupPage() {
             placeholder={t("usernamePH")}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400 bg-white/90"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 bg-white/90"
             required
           />
         </div>
@@ -156,7 +155,7 @@ export default function SignupPage() {
             placeholder={t("companyPH")}
             value={company}
             onChange={(e) => setCompany(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400 bg-white/90"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 bg-white/90"
           />
         </div>
 
@@ -170,7 +169,7 @@ export default function SignupPage() {
             placeholder={t("emailPH")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400 bg-white/90"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 bg-white/90"
             required
           />
         </div>
@@ -185,12 +184,12 @@ export default function SignupPage() {
             placeholder={t("passwordPH")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400 bg-white/90"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 bg-white/90"
             required
           />
         </div>
 
-        {/* Button */}
+        {/* Submit Button */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -205,9 +204,13 @@ export default function SignupPage() {
           {loading ? t("creating") : t("signUp")}
         </motion.button>
 
+        {/* Login Link */}
         <p className="mt-4 text-sm text-gray-800 text-center">
           {t("already")}{" "}
-          <a href="/login" className="text-green-700 font-semibold hover:underline">
+          <a
+            href="/login"
+            className="text-green-700 font-semibold hover:underline"
+          >
             {t("login")}
           </a>
         </p>

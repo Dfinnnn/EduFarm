@@ -11,10 +11,42 @@ export default function ProductPage() {
   const [selectedPackage, setSelectedPackage] = useState("");
   const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // NEW: Form state
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  // FIXED: handleSubmit now sends `package: selectedPackage`
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
+
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbwkIMqdg8OtGpsxAj-Ug1LXQxSHAxNa5yXGCF3OA0Ja36AjJqaegurZSSFqieZy_WmF4A/exec",
+        {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            message,
+            package: selectedPackage, // <-- FIXED
+          }),
+        }
+      );
+
+      setSubmitted(true);
+      setName("");
+      setEmail("");
+      setMessage("");
+
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   const starterPrice =
@@ -180,7 +212,11 @@ export default function ProductPage() {
               <h3 className="text-2xl font-bold mb-3">
                 {t(`product.${pkg}.title`)}
               </h3>
-              <p className={`mb-4 text-sm ${isGrowth ? "opacity-90" : "text-gray-600"}`}>
+              <p
+                className={`mb-4 text-sm ${
+                  isGrowth ? "opacity-90" : "text-gray-600"
+                }`}
+              >
                 {t(`product.${pkg}.desc`)}
               </p>
 
@@ -192,11 +228,19 @@ export default function ProductPage() {
                   : t("product.custom.priceLabel")}
               </p>
 
-              <p className={`mb-6 text-sm ${isGrowth ? "opacity-90" : "text-gray-500"}`}>
+              <p
+                className={`mb-6 text-sm ${
+                  isGrowth ? "opacity-90" : "text-gray-500"
+                }`}
+              >
                 {t(`product.${pkg}.note`)}
               </p>
 
-              <ul className={`mb-6 space-y-2 ${isGrowth ? "text-white" : "text-gray-700"}`}>
+              <ul
+                className={`mb-6 space-y-2 ${
+                  isGrowth ? "text-white" : "text-gray-700"
+                }`}
+              >
                 {renderFeatures(pkg)}
               </ul>
 
@@ -245,6 +289,8 @@ export default function ProductPage() {
             <input
               type="text"
               required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full p-3 border border-green-500 rounded-xl focus:ring-2 focus:ring-green-600 outline-none text-gray-900"
               placeholder={t("product.interest.namePlaceholder")}
             />
@@ -255,6 +301,8 @@ export default function ProductPage() {
             <input
               type="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-3 border border-green-500 rounded-xl focus:ring-2 focus:ring-green-600 outline-none text-gray-900"
               placeholder={t("product.interest.emailPlaceholder")}
             />
@@ -264,6 +312,8 @@ export default function ProductPage() {
           <div>
             <textarea
               rows={4}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="w-full p-3 border border-green-500 rounded-xl focus:ring-2 focus:ring-green-600 outline-none text-gray-900"
               placeholder={t("product.interest.messagePlaceholder")}
             />
