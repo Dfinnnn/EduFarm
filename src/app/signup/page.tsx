@@ -6,19 +6,21 @@ import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // local language state
   const [lang, setLang] = useState<"en" | "bm">("en");
 
-  // translations
   const translations: Record<"en" | "bm", Record<string, string>> = {
     en: {
       title: "🌾 Create Your EduFarm Account",
@@ -105,6 +107,7 @@ export default function SignupPage() {
         >
           EN
         </button>
+
         <button
           onClick={() => setLang("bm")}
           className={`px-3 py-1 rounded-lg text-sm font-semibold transition ${
@@ -125,10 +128,14 @@ export default function SignupPage() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-96 z-10 border border-green-100"
       >
-        <h1 className="text-3xl font-extrabold mb-2 text-green-700">
+        <h1 className="text-3xl font-extrabold mb-2 text-green-700 text-center">
           {t("title")}
         </h1>
-        <p className="text-sm text-gray-700 mb-6">{t("subtitle")}</p>
+
+        {/* Subtitle center fix */}
+        <p className="text-sm text-gray-700 mb-6 text-center">
+          {t("subtitle")}
+        </p>
 
         {/* Username */}
         <div className="mb-4 text-left">
@@ -174,19 +181,29 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Password */}
-        <div className="mb-6 text-left">
+        {/* Password + Eye Icon */}
+        <div className="mb-6 text-left relative">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
             {t("passwordLabel")}
           </label>
+
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder={t("passwordPH")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 bg-white/90"
+            className="w-full p-3 pr-12 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 bg-white/90"
             required
           />
+
+          {/* Centered eye icon */}
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 mt-3 text-gray-700"
+          >
+            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+          </button>
         </div>
 
         {/* Submit Button */}

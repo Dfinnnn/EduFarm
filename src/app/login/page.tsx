@@ -5,17 +5,19 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [lang, setLang] = useState<"en" | "bm">("en");
 
   const router = useRouter();
 
-  // 🔥 Simple inline translations
   const t = {
     en: {
       title: "Welcome Back to EduFarm 👋",
@@ -63,6 +65,7 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex h-screen items-center justify-center overflow-hidden">
+
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -89,7 +92,7 @@ export default function LoginPage() {
         </button>
       </div>
 
-      {/* Login Box */}
+      {/* Login Form */}
       <motion.form
         onSubmit={handleLogin}
         initial={{ y: 40, opacity: 0 }}
@@ -117,19 +120,31 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* Password */}
+        {/* Password With Eye Icon */}
         <div className="mb-6 text-left">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
             {text.password}
           </label>
-          <input
-            type="password"
-            placeholder={text.passwordPH}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400"
-            required
-          />
+
+          <div className="relative flex items-center">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder={text.passwordPH}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-3 pr-12 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400"
+              required
+            />
+
+            {/* Eye Toggle */}
+            <button
+              type="button"
+              className="absolute right-3 text-gray-600 hover:text-gray-800"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Error */}
@@ -143,7 +158,7 @@ export default function LoginPage() {
           </motion.p>
         )}
 
-        {/* Button */}
+        {/* Login Button */}
         <button
           type="submit"
           disabled={loading}
@@ -152,11 +167,11 @@ export default function LoginPage() {
               ? "bg-green-300 cursor-not-allowed"
               : "bg-green-600 hover:bg-green-700"
           }`}
-          >
+        >
           {loading ? text.loading : text.login}
         </button>
 
-        {/* Footer */}
+        {/* Signup */}
         <p className="mt-5 text-sm text-gray-800">
           {text.noAccount}{" "}
           <a href="/signup" className="text-green-600 font-semibold hover:underline">
