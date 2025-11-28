@@ -197,5 +197,44 @@
     "loading": "Sedang Mendaftar...",
     "alreadyAccount": "Sudah mempunyai akaun?",
     "login": "Log Masuk"
+  },
+  "landing": {
+  "hero": {
+    "title": "Berkebun Dengan Lebih Bijak\nBersama Blue Sky Farm",
+    "subtitle": "Dapatkan pandangan pintar, hasil lebih sihat dan usaha yang lebih minimum. Blue Sky Farm membantu anda mengurus tanaman dengan lebih yakin.",
+    "login": "Log Masuk",
+    "signup": "Daftar"
+  },
+
+  "features": {
+    "title": "Kenapa Petani Memilih Kami",
+
+    "card1Title": "Tanam Dengan Yakin",
+    "card1Desc": "Terima panduan masa nyata untuk membuat keputusan lebih tepat dan meningkatkan hasil tanaman dengan mudah.",
+
+    "card2Title": "Jimat Masa & Kurang Kerja",
+    "card2Desc": "Sistem automasi dan pemantauan pintar mengurangkan kerja manual sambil meningkatkan kecekapan ladang.",
+
+    "card3Title": "Pemantauan Segera",
+    "card3Desc": "Jejaki kesihatan tanaman, keadaan ladang dan amaran penting dalam satu papan pemuka yang ringkas.",
+
+    "card4Title": "Amaran Perosak & Penyakit Awal",
+    "card4Desc": "Kenal pasti ancaman awal sebelum ia merebak. Dapatkan notifikasi segera melalui AI.",
+
+    "card5Title": "Penggunaan Sumber Lebih Cekap",
+    "card5Desc": "Jimat air, baja dan tenaga melalui automasi pintar yang mengoptimumkan penggunaan sumber."
+  },
+
+  "about": {
+    "title": "Tentang Blue Sky Farm",
+    "desc": "Kami membantu petani memodenkan operasi ladang melalui alat pintar yang memudahkan pemantauan, meningkatkan produktiviti dan menyokong pertumbuhan mampan jangka panjang."
+  },
+
+  "cta": {
+    "title": "Sedia Untuk Naik Taraf Ladang Anda?",
+    "subtitle": "Mulakan perjalanan pertanian pintar dan automasi berasaskan data hari ini.",
+    "getStarted": "Mulakan Sekarang"
   }
+}
+
 }

@@ -1,412 +1,208 @@
-// src/app/page.tsx
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { onAuthStateChanged, User } from "firebase/auth";
-import { auth } from "../firebase";
-import { db } from "../firebase";
-import { doc, getDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
-import VideoCard from "./components/VideoCard";
-import { rawVideos, Video } from "../data/videos";
-import Chatbot from "./components/chatbot";
-import { useTranslations } from "@/hooks/useTranslations";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { ArrowRight, Leaf, BarChart3, Bot, Package, Zap } from "lucide-react";
 
-function parseYouTubeLink(link: string) {
-  const regex =
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-  const match = link.match(regex);
-  if (!match) return { thumbnail: "", embed: "" };
-  const videoId = match[1];
-  return {
-    thumbnail: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
-    embed: `https://www.youtube.com/embed/${videoId}`,
-  };
-}
+// Translations
+import eng from "../translations/en.json";
+import bm from "../translations/bm.json";
 
-export default function Home() {
-  const [user, setUser] = useState<User | null>(null);
-  const [username, setUsername] = useState<string>("");
-  const router = useRouter();
+export default function LandingPage() {
+  const [lang, setLang] = useState("en");
+  const t = lang === "en" ? eng.landing : bm.landing;
 
-  // translation
-  const { t } = useTranslations();
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (!currentUser) {
-        router.push("/login");
-        return;
-      }
-
-      setUser(currentUser);
-
-      try {
-        const userRef = doc(db, "users", currentUser.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          setUsername(userData.username || "User");
-        } else {
-          setUsername("User");
-        }
-      } catch (error) {
-        console.error("Error fetching username:", error);
-        setUsername("User");
-      }
-    });
-
-    return () => unsubscribe();
-  }, [router]);
-
-  const videos = useMemo(
-    () =>
-      rawVideos.map((v) => {
-        const { thumbnail, embed } = parseYouTubeLink(v.link);
-        return { ...v, thumbnail, embed };
-      }),
-    []
-  );
-
-  const [featuredVideos, setFeaturedVideos] = useState<Video[]>([]);
-  useEffect(() => {
-    const shuffled = [...videos].sort(() => 0.5 - Math.random());
-    setFeaturedVideos(shuffled.slice(0, 3));
-  }, [videos]);
-
-  if (!user) return null;
+  const renderTitleWithLineBreaks = (title: string) =>
+    title.split("\n").map((line, idx) => (
+      <span key={idx}>
+        {line}
+        <br />
+      </span>
+    ));
 
   return (
-    <div className="relative min-h-screen bg-white">
-      {/* HERO */}
-      <section
-        style={{
-          position: "relative",
-          color: "white",
-          textAlign: "center",
-          padding: "80px 20px",
-          borderBottomLeftRadius: "50px",
-          borderBottomRightRadius: "50px",
-          backgroundImage: "url('/bg_image.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(0, 0, 0, 0.5)",
-            borderBottomLeftRadius: "50px",
-            borderBottomRightRadius: "50px",
-          }}
-        />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>
-            {t("home.hero.title").replace("{username}", username)}
-          </h1>
-          <p style={{ fontSize: "1.2rem", marginBottom: "30px" }}>
-            {t("home.hero.subtitle")}
-          </p>
-          <a
-            href="/about"
-            style={{
-              background: "white",
-              color: "#2E7D32",
-              padding: "12px 25px",
-              borderRadius: "25px",
-              fontWeight: "bold",
-              textDecoration: "none",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-            }}
-          >
-            {t("home.hero.aboutButton")}
-          </a>
-        </div>
-      </section>
+    <main className="min-h-screen w-full bg-gradient-to-b from-[#e9f5ff] to-white text-gray-900 overflow-x-hidden relative">
 
-      {/* PRODUCT SECTION */}
-      <section style={{ padding: "60px 20px", textAlign: "center" }}>
-        <h2
-          style={{
-            fontSize: "2.3rem",
-            color: "#1B5E20",
-            fontWeight: "bold",
-            marginBottom: "25px",
-          }}
-        >
-          {t("home.product.title")}
-        </h2>
-        <p
-          style={{
-            fontSize: "1.1rem",
-            maxWidth: "800px",
-            margin: "0 auto 40px",
-            color: "#333",
-          }}
-        >
-          {t("home.product.description")}
-        </p>
-
-        {/* product image (unchanged) */}
-        <img
-          src="/product_mockup.jpg"
-          alt={t("home.product.imageAlt")}
-          style={{
-            display: "block",
-            margin: "0 auto 40px",
-            width: "80%",
-            maxWidth: "600px",
-            borderRadius: "20px",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
-          }}
-        />
-
-        <h3
-          style={{
-            fontSize: "1.8rem",
-            color: "#1B5E20",
-            fontWeight: "600",
-            marginBottom: "30px",
-          }}
-        >
-          {t("home.product.featuresTitle")}
-        </h3>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
-          {[
-            { icon: "🌡️", key: "soil" },
-            { icon: "💧", key: "water" },
-            { icon: "📱", key: "dashboard" },
-            { icon: "⚙️", key: "pest" },
-            { icon: "☀️", key: "weather" },
-          ].map((f, i) => (
-            <div
-              key={i}
-              style={{
-                background: "#E8F5E9",
-                padding: "25px",
-                borderRadius: "18px",
-                width: "250px",
-                boxShadow: "0 3px 8px rgba(0,0,0,0.1)",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                minHeight: "140px",
-                transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                cursor: "pointer",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-8px)";
-                e.currentTarget.style.boxShadow = "0 8px 16px rgba(0,0,0,0.2)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 3px 8px rgba(0,0,0,0.1)";
-              }}
-            >
-              <div style={{ fontSize: "2rem", marginBottom: "10px" }}>
-                {f.icon}
-              </div>
-              <h3
-                style={{
-                  fontSize: "1.3rem",
-                  color: "#000",
-                  fontWeight: "500",
-                }}
-              >
-                {t(`home.product.features.${f.key}`)}
-              </h3>
-            </div>
-          ))}
-        </div>
-
-        <a
-          href="/product"
-          style={{
-            display: "inline-block",
-            marginTop: "50px",
-            background: "#2E7D32",
-            color: "white",
-            padding: "12px 25px",
-            borderRadius: "25px",
-            fontWeight: "bold",
-            textDecoration: "none",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-          }}
-        >
-          {t("home.product.learnMore")}
-        </a>
-      </section>
-
-      {/* FEATURED VIDEOS */}
-      <section id="featured" style={{ padding: "50px 20px", textAlign: "center" }}>
-        <h2
-          style={{
-            fontSize: "2.2rem",
-            marginBottom: "30px",
-            color: "#1B5E20",
-            fontWeight: "bold",
-          }}
-        >
-          {t("home.videos.title")}
-        </h2>
-
-        <p
-          style={{
-            fontSize: "1.1rem",
-            color: "#444",
-            marginBottom: "35px",
-          }}
-        >
-          {t("home.videos.subtitle")}
-        </p>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: "20px",
-          }}
-        >
-          {featuredVideos.map((video, idx) => (
-            <VideoCard key={idx} video={video} />
-          ))}
-        </div>
-
-        <a
-          href="/videos"
-          style={{
-            display: "inline-block",
-            marginTop: "40px",
-            background: "#2E7D32",
-            color: "white",
-            padding: "12px 25px",
-            borderRadius: "25px",
-            fontWeight: "bold",
-            textDecoration: "none",
-            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-            transition: "transform 0.3s ease, box-shadow 0.3s ease",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "translateY(-4px)";
-            e.currentTarget.style.boxShadow = "0 6px 14px rgba(0,0,0,0.25)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-          }}
-        >
-          {t("home.videos.exploreButton")}
-        </a>
-      </section>
-
-      {/* INTEREST FORM */}
-      <section
-        style={{
-          background: "#F1F8E9",
-          padding: "60px 20px",
-          textAlign: "center",
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "2rem",
-            color: "#2E7D32",
-            marginBottom: "20px",
-            fontWeight: "bold",
-          }}
-        >
-          {t("home.interest.title")}
-        </h2>
-        <p style={{ fontSize: "1rem", marginBottom: "30px", color: "#333" }}>
-          {t("home.interest.subtitle")}
-        </p>
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert(t("home.interest.alertSuccess"));
-          }}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "15px",
-            maxWidth: "400px",
-            margin: "0 auto",
-          }}
-        >
-          <input
-            type="text"
-            placeholder={t("home.interest.form.name")}
-            required
-            style={{
-              width: "100%",
-              padding: "10px 15px",
-              borderRadius: "10px",
-              border: "1px solid #ccc",
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "1rem",
-            }}
-          />
-          <input
-            type="email"
-            placeholder={t("home.interest.form.email")}
-            required
-            style={{
-              width: "100%",
-              padding: "10px 15px",
-              borderRadius: "10px",
-              border: "1px solid #ccc",
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "1rem",
-            }}
-          />
-          <textarea
-            placeholder={t("home.interest.form.message")}
-            rows={3}
-            style={{
-              width: "100%",
-              padding: "10px 15px",
-              borderRadius: "10px",
-              border: "1px solid #ccc",
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "1rem",
-            }}
-          />
+      {/* LANGUAGE SWITCHER */}
+      <div className="absolute top-6 right-6 z-20 flex gap-4">
+        {["en", "bm"].map((lng) => (
           <button
-            type="submit"
-            style={{
-              background: "#2E7D32",
-              color: "white",
-              padding: "12px 25px",
-              borderRadius: "25px",
-              fontWeight: "bold",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-            }}
+            key={lng}
+            onClick={() => setLang(lng)}
+            className={`px-4 py-2 rounded-xl transition shadow ${
+              lang === lng
+                ? "bg-blue-600 text-white shadow-blue-300"
+                : "bg-gray-100 hover:bg-gray-200"
+            }`}
           >
-            {t("home.interest.form.submit")}
+            {lng.toUpperCase()}
           </button>
-        </form>
+        ))}
+      </div>
+
+      {/* HERO SECTION */}
+      <section className="w-full flex flex-col items-center justify-center text-center pt-36 pb-24 px-6 relative">
+
+        {/* Animated Logo */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7, y: -20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mb-10"
+        >
+          <motion.img
+            src="/logoresize.png"
+            alt="Blue Sky Farm Logo"
+            animate={{ y: [0, -12, 0] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="w-64 md:w-72 h-auto drop-shadow-xl"
+          />
+        </motion.div>
+
+        {/* HERO TITLE */}
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          className="text-5xl md:text-6xl font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-500"
+        >
+          {renderTitleWithLineBreaks(t.hero.title)}
+        </motion.h1>
+
+        {/* HERO SUBTITLE */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.9 }}
+          className="mt-6 text-lg md:text-xl max-w-2xl text-gray-600"
+        >
+          {t.hero.subtitle}
+        </motion.p>
+
+        {/* CTA BUTTONS */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.9 }}
+          className="mt-10 flex flex-wrap gap-4 justify-center"
+        >
+          <Link href="/login">
+            <button
+              className="
+                px-8 py-3 rounded-xl font-medium flex items-center gap-2 transition-all
+                bg-blue-600 text-white shadow-lg shadow-blue-300/40
+                hover:scale-[1.07] hover:shadow-blue-500/60 hover:shadow-2xl hover:brightness-110
+                active:scale-95
+              "
+            >
+              {t.hero.login}
+              <ArrowRight size={18} />
+            </button>
+          </Link>
+
+          <Link href="/signup">
+            <button
+              className="
+                relative px-8 py-3 rounded-xl font-medium text-blue-600 border border-blue-600 transition-all
+                overflow-hidden
+                hover:bg-blue-50 hover:scale-[1.07] active:scale-95
+                before:absolute before:inset-0 before:bg-gradient-to-r before:from-blue-400 before:to-teal-400
+                before:opacity-0 hover:before:opacity-20 before:transition-opacity
+              "
+            >
+              {t.hero.signup}
+            </button>
+          </Link>
+        </motion.div>
       </section>
 
-      <Chatbot />
-    </div>
+      {/* BENEFITS SECTION */}
+      <section className="w-full py-24 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-14">{t.features.title}</h2>
+
+          <div className="flex flex-col items-center gap-10">
+
+            {/* TOP 3 CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+
+              <motion.div whileHover={{ scale: 1.05 }} className="p-8 rounded-2xl bg-white shadow-md border hover:shadow-xl transition text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Leaf className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">{t.features.card1Title}</h3>
+                <p className="text-gray-600">{t.features.card1Desc}</p>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.05 }} className="p-8 rounded-2xl bg-white shadow-md border hover:shadow-xl transition text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                  <BarChart3 className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">{t.features.card2Title}</h3>
+                <p className="text-gray-600">{t.features.card2Desc}</p>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.05 }} className="p-8 rounded-2xl bg-white shadow-md border hover:shadow-xl transition text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Bot className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">{t.features.card3Title}</h3>
+                <p className="text-gray-600">{t.features.card3Desc}</p>
+              </motion.div>
+            </div>
+
+            {/* BOTTOM 2 CARDS */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:w-[70%]">
+
+              <motion.div whileHover={{ scale: 1.05 }} className="p-8 rounded-2xl bg-white shadow-md border hover:shadow-xl transition text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Package className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">{t.features.card4Title}</h3>
+                <p className="text-gray-600">{t.features.card4Desc}</p>
+              </motion.div>
+
+              <motion.div whileHover={{ scale: 1.05 }} className="p-8 rounded-2xl bg-white shadow-md border hover:shadow-xl transition text-center">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Zap className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-blue-600">{t.features.card5Title}</h3>
+                <p className="text-gray-600">{t.features.card5Desc}</p>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT SECTION */}
+      <section className="w-full py-24 px-6 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-8">{t.about.title}</h2>
+          <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
+            {t.about.desc}
+          </p>
+        </div>
+      </section>
+
+      {/* FINAL CTA SECTION */}
+      <section className="w-full py-24 px-6 bg-white text-center">
+        <h2 className="text-4xl font-bold mb-6">{t.cta.title}</h2>
+        <p className="text-gray-600 mb-10 text-lg">{t.cta.subtitle}</p>
+
+        <Link href="/signup">
+          <button
+            className="
+              px-10 py-4 rounded-xl bg-blue-600 text-white font-medium text-lg
+              transition-all shadow-lg shadow-blue-300/40
+              hover:scale-[1.07] hover:shadow-blue-500/60 hover:shadow-2xl hover:brightness-110
+              active:scale-95
+            "
+          >
+            {t.cta.getStarted}
+          </button>
+        </Link>
+      </section>
+    </main>
   );
 }

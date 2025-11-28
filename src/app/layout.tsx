@@ -12,7 +12,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   const hideUI =
     pathname === "/login" ||
-    pathname === "/signup";
+    pathname === "/signup"||
+    pathname === "/";
 
   return (
     <html lang="en">

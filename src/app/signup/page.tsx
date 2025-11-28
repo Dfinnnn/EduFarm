@@ -23,7 +23,7 @@ export default function SignupPage() {
 
   const translations: Record<"en" | "bm", Record<string, string>> = {
     en: {
-      title: "🌾 Create Your EduFarm Account",
+      title: "Create Your Blue Sky Farm Account",
       subtitle: "Sign up to start automating and learning",
       usernameLabel: "Username",
       usernamePH: "your name",
@@ -39,7 +39,7 @@ export default function SignupPage() {
       login: "Login",
     },
     bm: {
-      title: "🌾 Cipta Akaun EduFarm Anda",
+      title: "Cipta Akaun Blue Sky Farm Anda",
       subtitle: "Daftar untuk memulakan automasi dan pembelajaran",
       usernameLabel: "Nama Pengguna",
       usernamePH: "nama anda",
@@ -128,11 +128,20 @@ export default function SignupPage() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-96 z-10 border border-green-100"
       >
+
+        {/* LOGO (inside the card, centered) */}
+        <div className="flex justify-center mb-4">
+          <img
+            src="/logoresize.png"
+            alt="Blue Sky Farm Logo"
+            className="w-28 h-auto drop-shadow-md"
+          />
+        </div>
+
         <h1 className="text-3xl font-extrabold mb-2 text-green-700 text-center">
           {t("title")}
         </h1>
 
-        {/* Subtitle center fix */}
         <p className="text-sm text-gray-700 mb-6 text-center">
           {t("subtitle")}
         </p>
@@ -181,7 +190,7 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Password + Eye Icon */}
+        {/* Password */}
         <div className="mb-6 text-left relative">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
             {t("passwordLabel")}
@@ -196,7 +205,6 @@ export default function SignupPage() {
             required
           />
 
-          {/* Centered eye icon */}
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
@@ -206,7 +214,7 @@ export default function SignupPage() {
           </button>
         </div>
 
-        {/* Submit Button */}
+        {/* Submit */}
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -221,7 +229,6 @@ export default function SignupPage() {
           {loading ? t("creating") : t("signUp")}
         </motion.button>
 
-        {/* Login Link */}
         <p className="mt-4 text-sm text-gray-800 text-center">
           {t("already")}{" "}
           <a

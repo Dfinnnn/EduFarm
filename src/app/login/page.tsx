@@ -11,7 +11,6 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [lang, setLang] = useState<"en" | "bm">("en");
@@ -20,7 +19,7 @@ export default function LoginPage() {
 
   const t = {
     en: {
-      title: "Welcome Back to EduFarm 👋",
+      title: "Welcome to Blue Sky Farm",
       subtitle: "Please log in to your account",
       email: "Email",
       emailPH: "you@example.com",
@@ -32,7 +31,7 @@ export default function LoginPage() {
       signup: "Sign Up",
     },
     bm: {
-      title: "Selamat Datang ke EduFarm 👋",
+      title: "Selamat Datang ke Blue Sky Farm",
       subtitle: "Sila log masuk ke akaun anda",
       email: "Emel",
       emailPH: "anda@contoh.com",
@@ -54,10 +53,9 @@ export default function LoginPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("✅ Login successful!");
-      router.push("/");
+      router.push("/home");
     } catch (error: any) {
-      setErrorMsg(error.message);
+      setErrorMsg("Invalid email or password.");
     } finally {
       setLoading(false);
     }
@@ -69,27 +67,24 @@ export default function LoginPage() {
       {/* Background */}
       <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('/login_bg.jpg')` }}
+        style={{ backgroundImage: `url('/loginpage_1.png')` }}
       />
 
       {/* Language Switch */}
       <div className="absolute top-4 right-4 z-20 flex gap-2">
-        <button
-          className={`px-3 py-1 rounded ${
-            lang === "en" ? "bg-green-600 text-white" : "bg-white text-black"
-          }`}
-          onClick={() => setLang("en")}
-        >
-          EN
-        </button>
-        <button
-          className={`px-3 py-1 rounded ${
-            lang === "bm" ? "bg-green-600 text-white" : "bg-white text-black"
-          }`}
-          onClick={() => setLang("bm")}
-        >
-          BM
-        </button>
+        {["en", "bm"].map((lng) => (
+          <button
+            key={lng}
+            className={`px-3 py-1 rounded-xl transition ${
+              lang === lng
+                ? "bg-green-600 text-white shadow"
+                : "bg-white text-black hover:bg-gray-200"
+            }`}
+            onClick={() => setLang(lng as "en" | "bm")}
+          >
+            {lng.toUpperCase()}
+          </button>
+        ))}
       </div>
 
       {/* Login Form */}
@@ -100,9 +95,26 @@ export default function LoginPage() {
         transition={{ type: "spring", duration: 0.8 }}
         className="relative bg-white/90 p-10 rounded-2xl shadow-xl w-96 text-center backdrop-blur-sm border border-green-200 z-10"
       >
-        <h1 className="text-3xl font-extrabold mb-4 text-green-700">
+
+        {/* Logo */}
+        <motion.img
+          src="/logoresize.png"
+          alt="Blue Sky Farm Logo"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="w-32 mx-auto mb-4 drop-shadow-md"
+        />
+
+        <motion.h1
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-2xl font-extrabold mb-2 text-green-700"
+        >
           {text.title}
-        </h1>
+        </motion.h1>
+
         <p className="text-sm text-gray-800 mb-6">{text.subtitle}</p>
 
         {/* Email */}
@@ -115,12 +127,12 @@ export default function LoginPage() {
             placeholder={text.emailPH}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400"
+            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900"
             required
           />
         </div>
 
-        {/* Password With Eye Icon */}
+        {/* Password */}
         <div className="mb-6 text-left">
           <label className="block text-gray-900 text-sm mb-1 font-medium">
             {text.password}
@@ -132,14 +144,14 @@ export default function LoginPage() {
               placeholder={text.passwordPH}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 pr-12 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900 font-medium placeholder-gray-400"
+              className="w-full p-3 pr-12 border rounded-lg focus:ring-2 focus:ring-green-400 outline-none text-gray-900"
               required
             />
 
             {/* Eye Toggle */}
             <button
               type="button"
-              className="absolute right-3 text-gray-600 hover:text-gray-800"
+              className="absolute right-3 text-gray-600 hover:text-gray-900"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -162,7 +174,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={loading}
-          className={`w-full py-3 rounded-lg text-white font-semibold transition-all duration-300 ${
+          className={`w-full py-3 rounded-lg text-white font-semibold transition-all ${
             loading
               ? "bg-green-300 cursor-not-allowed"
               : "bg-green-600 hover:bg-green-700"
@@ -174,7 +186,7 @@ export default function LoginPage() {
         {/* Signup */}
         <p className="mt-5 text-sm text-gray-800">
           {text.noAccount}{" "}
-          <a href="/signup" className="text-green-600 font-semibold hover:underline">
+          <a href="/signup" className="text-green-700 font-semibold hover:underline">
             {text.signup}
           </a>
         </p>

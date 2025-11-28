@@ -40,7 +40,7 @@ export default function Header() {
   };
 
   const links = [
-    { href: "/", label: t("nav.home") },
+    { href: "/home", label: t("nav.home") },
     { href: "/about", label: t("nav.about") },
     { href: "/product", label: t("nav.product") },
     { href: "/videos", label: t("nav.videos") },
