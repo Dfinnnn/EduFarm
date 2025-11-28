@@ -324,7 +324,7 @@ export default function Home() {
         </p>
 
         <a
-          href="https://wa.me/60102933297"
+          href="https://wa.me/60139685058"
           target="_blank"
           style={{
             background: "#25D366",
