@@ -148,19 +148,22 @@
       "joinDesc": "Join our growing community and share farming knowledge."
     }
   },
-  "videos": {
-    "title": "Explore Farming Videos",
+"videos": {
+  "categories": {
     "all": "All",
-    "categories": {
-      "tutorial": "Tutorial",
-      "gardening": "Gardening",
-      "hydroponic": "Hydroponic",
-      "smartfarm": "SmartFarm",
-      "education": "Education"
-    },
-    "cards": {
-      "watch": "Watch Video"
-    }
+    "planting": "Planting",
+    "plantation": "Plantation",
+    "mixed": "Mixed Farming",
+    "organic": "Organic Farming",
+    "smart": "Smart Agriculture",
+    "pest": "Pest Control",
+    "hydroponics": "Hydroponics"
+  },
+  "title": "Explore Farming Videos",
+  "cards": {
+    "watch": "Watch Video"
+  }
+
   },
   "forum": {
     "heroTitle": "Welcome to Farmnity",
@@ -201,42 +204,33 @@
     "login": "Login"
   },
   "landing": {
-  "hero": {
-    "title": "Grow Smarter\nWith Blue Sky Farm",
-    "subtitle": "Smarter insights. Healthier crops. Less effort. Blue Sky Farm gives you powerful tools to grow more with confidence.",
-    "login": "Login",
-    "signup": "Signup"
-  },
-
-  "features": {
-    "title": "Why Farmers Choose Us",
-
-    "card1Title": "Grow With Confidence",
-    "card1Desc": "Receive real-time guidance that helps you make better decisions and improve your crop outcomes effortlessly.",
-
-    "card2Title": "Save Time & Reduce Workload",
-    "card2Desc": "Automated systems and smart monitoring reduce manual labor while boosting farm efficiency.",
-
-    "card3Title": "Instant Visibility",
-    "card3Desc": "Track everything that matters—crop health, conditions, and alerts—on a simple, unified dashboard.",
-
-    "card4Title": "Early Pest & Disease Alerts",
-    "card4Desc": "Detect threats before they spread. Protect your crops with instant AI-powered warnings.",
-
-    "card5Title": "Smarter Resource Usage",
-    "card5Desc": "Use water, fertilizer, and energy more efficiently with optimized smart automation."
-  },
-
-  "about": {
-    "title": "About Blue Sky Farm",
-    "desc": "We help farmers modernize their farming with intelligent tools that simplify monitoring, increase productivity, and support sustainable long-term growth."
-  },
-
-  "cta": {
-    "title": "Ready To Upgrade Your Farm?",
-    "subtitle": "Step into data-driven, automated smart farming today.",
-    "getStarted": "Start Now"
+    "hero": {
+      "title": "Grow Smarter\nWith Blue Sky Farm",
+      "subtitle": "Smarter insights. Healthier crops. Less effort. Blue Sky Farm gives you powerful tools to grow more with confidence.",
+      "login": "Login",
+      "signup": "Signup"
+    },
+    "features": {
+      "title": "Why Farmers Choose Us",
+      "card1Title": "Grow With Confidence",
+      "card1Desc": "Receive real-time guidance that helps you make better decisions and improve your crop outcomes effortlessly.",
+      "card2Title": "Save Time & Reduce Workload",
+      "card2Desc": "Automated systems and smart monitoring reduce manual labor while boosting farm efficiency.",
+      "card3Title": "Instant Visibility",
+      "card3Desc": "Track everything that matters—crop health, conditions, and alerts—on a simple, unified dashboard.",
+      "card4Title": "Early Pest & Disease Alerts",
+      "card4Desc": "Detect threats before they spread. Protect your crops with instant AI-powered warnings.",
+      "card5Title": "Smarter Resource Usage",
+      "card5Desc": "Use water, fertilizer, and energy more efficiently with optimized smart automation."
+    },
+    "about": {
+      "title": "About Blue Sky Farm",
+      "desc": "We help farmers modernize their farming with intelligent tools that simplify monitoring, increase productivity, and support sustainable long-term growth."
+    },
+    "cta": {
+      "title": "Ready To Upgrade Your Farm?",
+      "subtitle": "Step into data-driven, automated smart farming today.",
+      "getStarted": "Start Now"
+    }
   }
-}
-
 }

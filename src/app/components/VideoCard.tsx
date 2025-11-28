@@ -1,21 +1,23 @@
 "use client";
 import React, { useState } from "react";
+import { useTranslations } from "@/hooks/useTranslations"; // ⬅ Import translation hook
 
 interface Video {
   title: string;
   link: string;
-  category: string;
+  category: string; // e.g., "Planting", "Organic Farming"
   thumbnail?: string;
   embed?: string;
 }
 
 interface Props {
   video: Video;
-  style?: React.CSSProperties; // ✅ allow custom styles
+  style?: React.CSSProperties;
 }
 
 export default function VideoCard({ video, style }: Props) {
   const [play, setPlay] = useState(false);
+  const { t } = useTranslations(); // ⬅ Use translations
 
   return (
     <div
@@ -26,7 +28,7 @@ export default function VideoCard({ video, style }: Props) {
         boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
         background: "#fff",
         transition: "transform 0.2s, box-shadow 0.2s",
-        ...style, // ✅ merge parent styles
+        ...style,
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "scale(1.03)";
@@ -99,7 +101,7 @@ export default function VideoCard({ video, style }: Props) {
             fontSize: "0.8rem",
           }}
         >
-          {video.category}
+          {t(`videos.categories.${video.category}`)}
         </span>
       </div>
     </div>

@@ -4,7 +4,7 @@ import VideoCard from "../components/VideoCard";
 import { rawVideos } from "../../data/videos";
 import { useTranslations } from "@/hooks/useTranslations";
 
-// 🔹 Parser stays here (UI-level)
+// 🔹 Parse YouTube link into embed + thumbnail
 function parseYouTubeLink(link: string) {
   const regex =
     /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
@@ -21,23 +21,36 @@ function parseYouTubeLink(link: string) {
 export default function VideosPage() {
   const { t, lang } = useTranslations();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  // 🔹 Use translation KEY for selected category (not text)
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  // 🔹 Set default category based on language
-  useEffect(() => {
-    setSelectedCategory(t("videos.all"));
-  }, [lang]);
+  // 🔹 Category keys (consistent in all languages)
+  const categoryKeys = [
+    "all",
+    "planting",
+    "plantation",
+    "mixed",
+    "organic",
+    "smart",
+    "pest",
+    "hydroponics",
+  ];
 
-  // 🔹 Enrich with embed + thumbnail
+  // 🔹 Build category list using translation keys
+  const categories = categoryKeys.map((key) => ({
+    key,
+    label: t(`videos.categories.${key}`)
+  }));
+
+  // 🔹 Add parser data
   const videos = rawVideos.map((v) => {
     const { thumbnail, embed } = parseYouTubeLink(v.link);
     return { ...v, thumbnail, embed };
   });
 
-  const categories = [t("videos.all"), ...Array.from(new Set(videos.map((v) => v.category)))];
-
+  // 🔹 Filter videos by KEY (not translated text)
   const filteredVideos =
-    selectedCategory === t("videos.all")
+    selectedCategory === "all"
       ? videos
       : videos.filter((v) => v.category === selectedCategory);
 
@@ -64,26 +77,26 @@ export default function VideosPage() {
           marginBottom: "40px",
         }}
       >
-        {categories.map((cat) => (
+        {categories.map(({ key, label }) => (
           <button
-            key={cat}
-            onClick={() => setSelectedCategory(cat)}
+            key={key}
+            onClick={() => setSelectedCategory(key)}
             style={{
               padding: "10px 20px",
               borderRadius: "25px",
               border: "none",
               cursor: "pointer",
-              background: selectedCategory === cat ? "#2E7D32" : "#e0e0e0",
-              color: selectedCategory === cat ? "white" : "#333",
+              background: selectedCategory === key ? "#2E7D32" : "#e0e0e0",
+              color: selectedCategory === key ? "white" : "#333",
               fontWeight: "bold",
               boxShadow:
-                selectedCategory === cat
+                selectedCategory === key
                   ? "0 4px 12px rgba(0,0,0,0.2)"
                   : "none",
               transition: "all 0.2s",
             }}
           >
-            {cat}
+            {label}
           </button>
         ))}
       </div>
