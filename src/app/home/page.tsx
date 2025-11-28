@@ -29,7 +29,6 @@ export default function Home() {
   const [username, setUsername] = useState<string>("");
   const router = useRouter();
 
-  // translation
   const { t } = useTranslations();
 
   useEffect(() => {
@@ -148,7 +147,6 @@ export default function Home() {
           {t("home.product.description")}
         </p>
 
-        {/* product image (unchanged) */}
         <img
           src="/product_mockup.jpg"
           alt={t("home.product.imageAlt")}
@@ -298,24 +296,16 @@ export default function Home() {
             boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
             transition: "transform 0.3s ease, box-shadow 0.3s ease",
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "translateY(-4px)";
-            e.currentTarget.style.boxShadow = "0 6px 14px rgba(0,0,0,0.25)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
-          }}
         >
           {t("home.videos.exploreButton")}
         </a>
       </section>
 
-      {/* INTEREST FORM */}
+      {/* CONTACT US BUTTON SECTION */}
       <section
         style={{
-          background: "#F1F8E9",
-          padding: "60px 20px",
+          background: "#E8F5E9",
+          padding: "70px 20px",
           textAlign: "center",
         }}
       >
@@ -327,83 +317,29 @@ export default function Home() {
             fontWeight: "bold",
           }}
         >
-          {t("home.interest.title")}
+          {t("home.contact.title", "Need Assistance?")}
         </h2>
         <p style={{ fontSize: "1rem", marginBottom: "30px", color: "#333" }}>
-          {t("home.interest.subtitle")}
+          {t("home.contact.subtitle", "We're here to help. Contact us directly!")}
         </p>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert(t("home.interest.alertSuccess"));
-          }}
+        <a
+          href="https://wa.me/60102933297"
+          target="_blank"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "15px",
-            maxWidth: "400px",
-            margin: "0 auto",
+            background: "#25D366",
+            color: "white",
+            padding: "14px 30px",
+            borderRadius: "30px",
+            fontWeight: "bold",
+            textDecoration: "none",
+            fontSize: "1.1rem",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+            cursor: "pointer",
           }}
         >
-          <input
-            type="text"
-            placeholder={t("home.interest.form.name")}
-            required
-            style={{
-              width: "100%",
-              padding: "10px 15px",
-              borderRadius: "10px",
-              border: "1px solid #ccc",
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "1rem",
-            }}
-          />
-          <input
-            type="email"
-            placeholder={t("home.interest.form.email")}
-            required
-            style={{
-              width: "100%",
-              padding: "10px 15px",
-              borderRadius: "10px",
-              border: "1px solid #ccc",
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "1rem",
-            }}
-          />
-          <textarea
-            placeholder={t("home.interest.form.message")}
-            rows={3}
-            style={{
-              width: "100%",
-              padding: "10px 15px",
-              borderRadius: "10px",
-              border: "1px solid #ccc",
-              color: "black",
-              backgroundColor: "white",
-              fontSize: "1rem",
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              background: "#2E7D32",
-              color: "white",
-              padding: "12px 25px",
-              borderRadius: "25px",
-              fontWeight: "bold",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-            }}
-          >
-            {t("home.interest.form.submit")}
-          </button>
-        </form>
+          💬 {t("home.contact.button", "Contact Us on WhatsApp")}
+        </a>
       </section>
 
       <Chatbot />
