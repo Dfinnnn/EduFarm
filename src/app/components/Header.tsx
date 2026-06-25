@@ -40,11 +40,12 @@ export default function Header() {
   };
 
   const links = [
-    { href: "/home", label: t("nav.home") },
-    { href: "/about", label: t("nav.about") },
-    { href: "/product", label: t("nav.product") },
-    { href: "/videos", label: t("nav.videos") },
-    { href: "/forum", label: t("nav.forum") },
+    { href: "/home", label: t("nav.home"), external: false },
+    { href: "/about", label: t("nav.about"), external: false },
+    { href: "/product", label: t("nav.product"), external: false },
+    { href: "/videos", label: t("nav.videos"), external: false },
+    { href: "/forum", label: t("nav.forum"), external: false },
+    { href: "https://bsfdashboard.vercel.app", label: t("nav.dashboard"), external: true },
   ];
 
   if (!mounted) return null;
@@ -73,16 +74,27 @@ export default function Header() {
                 className="relative group"
                 style={{ minWidth: "110px", textAlign: "center" }}
               >
-                <Link
-                  href={link.href}
-                  className={`px-3 py-2 rounded-full transition-all duration-300 block ${
-                    isActive
-                      ? "bg-green-600 text-white shadow-md"
-                      : "text-green-700 hover:bg-green-100"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+                {link.external ? (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-2 rounded-full transition-all duration-300 block text-green-700 hover:bg-green-100"
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={`px-3 py-2 rounded-full transition-all duration-300 block ${
+                      isActive
+                        ? "bg-green-600 text-white shadow-md"
+                        : "text-green-700 hover:bg-green-100"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                )}
               </li>
             );
           })}
@@ -130,21 +142,33 @@ export default function Header() {
       <div className="md:hidden overflow-x-auto flex justify-start gap-2 px-3 py-2 border-t border-green-100 bg-white">
 
         {/* Mobile navigation links */}
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={`px-3 py-2 rounded-md text-base font-semibold whitespace-nowrap ${
-              pathname === link.href
-                ? "bg-green-600 text-white"
-                : "text-green-700 hover:bg-green-100"
-            }`}
-          >
-            {link.label}
-          </Link>
-        ))}
+        {links.map((link) =>
+          link.external ? (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-2 rounded-md text-base font-semibold whitespace-nowrap text-green-700 hover:bg-green-100"
+            >
+              {link.label}
+            </a>
+          ) : (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-3 py-2 rounded-md text-base font-semibold whitespace-nowrap ${
+                pathname === link.href
+                  ? "bg-green-600 text-white"
+                  : "text-green-700 hover:bg-green-100"
+              }`}
+            >
+              {link.label}
+            </Link>
+          )
+        )}
 
-        {/* 🔥 Language Switch added to Mobile */}
+        {/* Language Switch added to Mobile */}
         <div className="flex gap-2 items-center">
           <button
             onClick={() => setLang("en")}
