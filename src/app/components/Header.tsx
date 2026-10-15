@@ -45,7 +45,7 @@ export default function Header() {
     { href: "/product", label: t("nav.product"), external: false },
     { href: "/videos", label: t("nav.videos"), external: false },
     { href: "/forum", label: t("nav.forum"), external: false },
-    { href: "https://bsfdashboard.vercel.app", label: t("nav.dashboard"), external: true },
+    { href: "https://dashboard.blueskyfarm.site/", label: t("nav.dashboard"), external: true },
   ];
 
   if (!mounted) return null;
